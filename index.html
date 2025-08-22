@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesley Ngcobo - Data Scientist & ML Specialist</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Particles Background -->
+    <div id="particles-container"></div>
+    
+    <!-- Neural Network SVG Background -->
+    <svg class="neural-bg" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#64ffda;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:0.1" />
+            </linearGradient>
+            <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#64ffda;stop-opacity:0.2" />
+                <stop offset="50%" style="stop-color:#4ecdc4;stop-opacity:0.4" />
+                <stop offset="100%" style="stop-color:#64ffda;stop-opacity:0.2" />
+            </linearGradient>
+        </defs>
+        
+        <!-- Neural Network Connections -->
+        <g class="connections">
+            <line x1="100" y1="150" x2="250" y2="120" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="100" y1="200" x2="250" y2="180" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="100" y1="250" x2="250" y2="220" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="250" y1="120" x2="400" y2="150" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="250" y1="180" x2="400" y2="200" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="250" y1="220" x2="400" y2="250" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="400" y1="150" x2="550" y2="120" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="400" y1="200" x2="550" y2="180" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="400" y1="250" x2="550" y2="220" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="550" y1="120" x2="700" y2="150" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="550" y1="180" x2="700" y2="200" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+            <line x1="550" y1="220" x2="700" y2="250" stroke="url(#connectionGradient)" stroke-width="1" opacity="0.4"/>
+        </g>
+        
+        <!-- Neural Network Nodes -->
+        <g class="nodes">
+            <circle cx="100" cy="150" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="100" cy="200" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="100" cy="250" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="250" cy="120" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="250" cy="180" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="250" cy="220" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="400" cy="150" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="400" cy="200" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="400" cy="250" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="550" cy="120" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="550" cy="180" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="550" cy="220" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="700" cy="150" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="700" cy="200" r="6" fill="url(#nodeGradient)" class="node"/>
+            <circle cx="700" cy="250" r="6" fill="url(#nodeGradient)" class="node"/>
+        </g>
+    </svg>
+
+    <!-- Navigation Header -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <img src="files/lezz.jpg" alt="Lesley Ngcobo" class="nav-profile-img">
+                <span class="nav-name">Lesley Ngcobo</span>
+            </a>
+
+            <div class="nav-menu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+    <div class="hero-content">
+        <img src="files/lezz.jpg" alt="Lesley Ngcobo" class="profile-img">
+        <h1 class="hero-name">Lesley Ngcobo</h1>
+        <div class="hero-title">
+            <span id="typing-text"></span><span class="cursor"></span>
+        </div>
+        <p class="hero-subtitle">Transforming data into insights, one algorithm at a time</p>
+    </div>
+</section>
+
+
+        <!-- Stats Dashboard -->
+        <section class="stats-dashboard">
+            <div class="stat-card">
+                <span class="stat-number" id="projects-count">5</span>
+                <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="datasets-count">10+</span>
+                <span class="stat-label">Datasets Analyzed</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="models-count">15</span>
+                <span class="stat-label">Models Built</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="accuracy-rate">94%</span>
+                <span class="stat-label">Avg. Model Accuracy</span>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="about-content">
+                <h2>About Me</h2>
+                <p>I'm a passionate Data Scientist and Machine Learning Specialist with expertise in transforming complex data into actionable insights. My work focuses on building intelligent systems that solve real-world problems.</p>
+                <p>With a strong foundation in statistical analysis and machine learning algorithms, I specialize in developing predictive models and data-driven solutions that drive business value.</p>
+                <p>When I'm not coding or building models, I enjoy learning how to use new tools and technologies in the data field, exploring new advancements in AI and machine learning, and building websites.</p>
+                
+                <div class="tech-stack">
+                    <div class="tech-item"><i class="fab fa-r-project"></i> R & RStudio</div>
+                    <div class="tech-item"><i class="fab fa-python"></i> Python</div>
+                    <div class="tech-item"><i class="fas fa-table"></i> Excel</div>
+                    <div class="tech-item"><i class="fas fa-chart-bar"></i> Power BI</div>
+                </div>
+            </div>
+            
+            <div class="about-visual">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Data Visualization" style="width: 100%; border-radius: 15px;">
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <h2 class="section-title">🧠 Technical Arsenal</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <span>🐍</span> Programming & Tools
+                    </h3>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>R</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>RStudio</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Excel</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Power BI</span>
+                            <span>40%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 40%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <span>📊</span> Other Skills
+                    </h3>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Data Visualization</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Recommender Systems</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Fraud Detection</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-name">
+                            <span>Data Cleaning</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <h2 class="section-title">🚀 Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" alt="DataQuest Recommender System" class="project-image">
+                    <h3 class="project-title">DataQuest Recommender System</h3>
+                    <p class="project-description">
+                        Collaborative Filtering + Hybrid Recommender for retail datasets. Built with advanced ML algorithms to provide personalized recommendations.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">R</span>
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">Collaborative Filtering</span>
+                        <span class="tech-tag">recommenderlab</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/lesley-2198/DataquestRcSys2025.git" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                        <span class="project-status">Completed</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Credit Card Fraud Detection" class="project-image">
+                    <h3 class="project-title">Credit Card Fraud Detection</h3>
+                    <p class="project-description">
+                        Fraud detection using imbalanced classification techniques. Includes R implementation and Power BI dashboards for real-time monitoring.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">R</span>
+                        <span class="tech-tag">Power BI</span>
+                        <span class="tech-tag">Fraud Detection</span>
+                        <span class="tech-tag">Logistic Regression</span>
+                        <span class="tech-tag">SMOTE</span>
+                        <span class="tech-tag">XGBoost</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/lesley-2198/CreditCardFraudDetection.git" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                        <span class="project-status">Work in Progress</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" alt="PropertyQuest" class="project-image">
+                    <h3 class="project-title">PropertyQuest</h3>
+                    <p class="project-description">
+                        Real estate search platform built with Angular & ASP.NET. Features advanced search algorithms and interactive property maps.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Angular</span>
+                        <span class="tech-tag">ASP.NET</span>
+                        <span class="tech-tag">Web Development</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/lesley-2198/PropertyQuest.git" class="project-link" target="_blank">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                        <span class="project-status">Work in Progress</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Client Portfolio Website" class="project-image">
+                    <h3 class="project-title">Client Portfolio Website</h3>
+                    <p class="project-description">
+                        A polished, responsive portfolio website delivered for a client. Features modern design, SEO optimization, and cross-platform compatibility.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://bongiwe.netlify.app" class="project-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> View Live Site
+                        </a>
+                        <span class="project-status">Completed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">🤝 Let's Connect & Collaborate</h2>
+            <p style="color: #8892b0; margin-bottom: 20px;">
+                Always excited to discuss data science, machine learning, and innovative projects!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:s225171406@mandela@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://www.linkedin.com/in/lesley-ngcobo-449b88240/" class="contact-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/lesley-2198" class="contact-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="files/Lesley Ngcobo - Resume.pdf" class="contact-link">
+                    <i class="fas fa-file-alt"></i> Resume
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2024 Lesley Ngcobo. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
