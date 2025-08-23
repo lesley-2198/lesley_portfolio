@@ -116,20 +116,17 @@ The color scheme can be easily modified in `style.css`:
 - **Mobile browsers**: iOS Safari 12+, Chrome Mobile 60+
 - **Features used**: CSS Grid, Flexbox, CSS Custom Properties, Intersection Observer
 
-## 📝 License
+## 👨‍💻 The Architect
 
-This project is open source and available under the [MIT License](LICENSE).
+<div align="center">
 
-## 🤝 Contributing
+### **Lesley Ngcobo**
+*Data Scientist | ML Engineer | Business Intelligence Specialist*
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+![Profile](https://img.shields.io/badge/Profile-Data_Scientist-00B4D8?style=for-the-badge)
+![Location](https://img.shields.io/badge/Location-South_Africa-FF6B6B?style=for-the-badge)
 
-## 📞 Contact
+**🔗 Connect with me:**
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/lesley-ngcobo-449b88240/)
+[![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:s225171406@mandela.ac.za)
 
-- **Email**: lesley.ngcobo@example.com
-- **LinkedIn**: [Lesley Ngcobo](https://linkedin.com/in/lesley-ngcobo)
-- **GitHub**: [@lesley-2198](https://github.com/lesley-2198)
-
----
-
-Built with ❤️ and ☕ for the Data Science community
