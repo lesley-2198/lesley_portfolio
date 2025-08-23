@@ -466,6 +466,79 @@ body {
     from { width: 0; }
 }
 
+/* Qualification Section */
+.qualification-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+    cursor: pointer;
+}
+
+.qualification-section:hover {
+    transform: translateY(-5px);
+    border-color: rgba(100, 255, 218, 0.3);
+    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+}
+
+.qualification-section.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.qualification-title {
+    font-size: 1.5rem;
+    color: #64ffda;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.qualification-title i {
+    font-size: 1.3rem;
+    background: linear-gradient(45deg, #64ffda, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.qualification-content {
+    display: flex;
+    justify-content: center;
+}
+
+.degree-info {
+    text-align: center;
+}
+
+.degree-info h4 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.degree-info p {
+    color: #8892b0;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.degree-info i {
+    color: #64ffda;
+    font-size: 1.1rem;
+}
+
 /* Projects Showcase */
 .projects-section {
     margin: 60px 0;
@@ -648,7 +721,7 @@ body {
     }
     
     .nav-menu.active {
-        transform: translateY(0);
+        transform: translateX(0);
         opacity: 1;
     }
     

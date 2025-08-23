@@ -163,6 +163,14 @@ class Navigation {
             });
         });
         
+        // Close menu when clicking on nav-logo
+        const navLogo = document.querySelector('.nav-logo');
+        if (navLogo) {
+            navLogo.addEventListener('click', () => {
+                this.closeMenu();
+            });
+        }
+        
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!this.navHeader.contains(e.target)) {
@@ -233,7 +241,7 @@ const navigation = new Navigation();
 // Scroll animations
 class ScrollAnimations {
     constructor() {
-        this.animatedElements = document.querySelectorAll('.skill-category, .project-card, .about-section, .skills-section, .projects-section, .contact-section');
+        this.animatedElements = document.querySelectorAll('.skill-category, .project-card, .about-section, .skills-section, .qualification-section, .projects-section, .contact-section');
         this.init();
     }
     
