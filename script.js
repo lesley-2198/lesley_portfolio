@@ -139,6 +139,7 @@ class Navigation {
         this.navHeader = document.querySelector('.nav-header');
         this.navToggle = document.querySelector('.nav-toggle');
         this.navMenu = document.querySelector('.nav-menu');
+        this.heroSection = document.querySelector('.hero');
         this.lastScrollY = 0;
         this.isScrolling = false;
         this.isMenuOpen = false;
@@ -219,6 +220,7 @@ class Navigation {
     closeMenu() {
         this.isMenuOpen = false;
         this.navToggle.classList.remove('active');
+        this.navToggle.setAttribute('aria-expanded', 'false');
         this.navMenu.classList.remove('active');
         // Restore body scroll
         document.body.style.overflow = '';
