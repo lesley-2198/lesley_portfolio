@@ -436,10 +436,6 @@ body {
     gap: 10px;
 }
 
-.skill-bar {
-    margin: 15px 0;
-}
-
 .skill-name {
     display: flex;
     justify-content: space-between;
@@ -821,7 +817,7 @@ body {
     }
             
     .hero {
-        padding-top: 120px; /* Account for fixed nav */
+        padding-top: 120px;
     }
     
     .hero-name {
