@@ -79,7 +79,7 @@ setTimeout(typeTitle, 1000);
 class ParticleSystem {
     constructor() {
         this.particles = [];
-        this.maxParticles = 150; // Increased for more particles throughout the site
+        this.maxParticles = 150;
         this.init();
     }
     
@@ -94,7 +94,7 @@ class ParticleSystem {
             if (this.particles.length < this.maxParticles) {
                 this.createParticle();
             }
-        }, 800); // Faster creation for more particles
+        }, 800);
     }
     
     createParticle() {
@@ -104,7 +104,7 @@ class ParticleSystem {
         // Random positioning and sizing
         particle.style.left = Math.random() * 100 + 'vw';
         particle.style.top = Math.random() * 100 + 'vh';
-        const size = Math.random() * 8 + 2; // Varied sizes
+        const size = Math.random() * 8 + 2;
         particle.style.width = size + 'px';
         particle.style.height = size + 'px';
         
@@ -126,7 +126,7 @@ class ParticleSystem {
                 particle.parentNode.removeChild(particle);
                 this.particles = this.particles.filter(p => p !== particle);
             }
-        }, 10000); // Longer lifespan for particles
+        }, 10000);
     }
 }
 
@@ -186,31 +186,30 @@ class Navigation {
         });
     }
     
-  handleScroll() {
-    this.heroSection = document.querySelector('.hero');
-    this.navHeader = document.querySelector('.nav-header');
+    handleScroll() {
+        this.heroSection = document.querySelector('.hero');
+        this.navHeader = document.querySelector('.nav-header');
 
-    if (this.isScrolling) return;
+        if (this.isScrolling) return;
 
-    this.isScrolling = true;
-    requestAnimationFrame(() => {
-        const currentScrollY = window.pageYOffset;
+        this.isScrolling = true;
+        requestAnimationFrame(() => {
+            const currentScrollY = window.pageYOffset;
 
-        // Get hero section height (or offset)
-        const heroHeight = this.heroSection.offsetHeight;
+            // Get hero section height
+            const heroHeight = this.heroSection.offsetHeight;
 
-        if (currentScrollY >= heroHeight) {
-            // Past hero section → show nav
-            this.navHeader.classList.add('nav-visible');
-        } else {
-            // Back in hero section → hide nav
-            this.navHeader.classList.remove('nav-visible');
-        }
+            if (currentScrollY >= heroHeight) {
+                // Past hero section → show nav
+                this.navHeader.classList.add('nav-visible');
+            } else {
+                // Back in hero section → hide nav
+                this.navHeader.classList.remove('nav-visible');
+            }
 
-        this.isScrolling = false;
-    });
-}
-
+            this.isScrolling = false;
+        });
+    }
     
     toggleMenu() {
         this.isMenuOpen = !this.isMenuOpen;
@@ -280,7 +279,7 @@ const skillObserver = new IntersectionObserver((entries) => {
 
 skillBars.forEach(bar => skillObserver.observe(bar));
 
-// Add hover effects for interactive elements
+// Combined DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', function() {
     // Add hover effects to stat cards
     document.querySelectorAll('.stat-card').forEach(card => {
@@ -325,6 +324,35 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.background = 'rgba(100, 255, 218, 0.1)';
         });
     });
+    
+    // Initialize project toggle
+    const projectToggle = new ProjectToggle();
+    
+    // Update project counter based on visible projects
+    function updateProjectCounter() {
+        const visibleProjects = document.querySelectorAll('.project-card:not([style*="display: none"])').length;
+        const projectsCountElement = document.getElementById('projects-count');
+        if (projectsCountElement) {
+            animateCounter(projectsCountElement, visibleProjects);
+        }
+    }
+    
+    // Call updateProjectCounter whenever projects are toggled
+    document.querySelectorAll('.project-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setTimeout(updateProjectCounter, 600);
+        });
+    });
+    
+    // Initialize skill bars with staggered animation
+    const skillFills = document.querySelectorAll('.skill-fill');
+    
+    skillFills.forEach((fill, index) => {
+        setTimeout(() => {
+            fill.style.width = fill.style.width || '0%';
+            fill.style.animation = 'skillLoad 2s ease-in-out';
+        }, index * 200);
+    });
 });
 
 // Smooth scrolling for navigation links
@@ -344,8 +372,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add scroll-based parallax effects
-window.addEventListener('scroll', function() {
+// Performance optimization: Throttle scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+// Apply throttling to scroll events
+window.addEventListener('scroll', throttle(function() {
+    // Scroll-based animations
     const scrolled = window.pageYOffset;
     const parallax = document.querySelector('.neural-bg');
     if (parallax) {
@@ -358,7 +401,7 @@ window.addEventListener('scroll', function() {
         const speed = scrolled * 0.1;
         profileImg.style.transform = `translateY(${speed}px)`;
     }
-});
+}, 16));
 
 // Add loading animation
 window.addEventListener('load', function() {
@@ -461,64 +504,6 @@ class ProjectToggle {
         });
     }
 }
-
-// Initialize project toggle after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the existing functionality
-    const projectToggle = new ProjectToggle();
-    
-    // Update project counter based on visible projects
-    function updateProjectCounter() {
-        const visibleProjects = document.querySelectorAll('.project-card:not([style*="display: none"])').length;
-        const projectsCountElement = document.getElementById('projects-count');
-        if (projectsCountElement) {
-            animateCounter(projectsCountElement, visibleProjects);
-        }
-    }
-    
-    // Call updateProjectCounter whenever projects are toggled
-    document.querySelectorAll('.project-toggle-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            setTimeout(updateProjectCounter, 600); // Wait for animation to complete
-        });
-    });
-});
-
-// Initialize skill bars with staggered animation
-document.addEventListener('DOMContentLoaded', function() {
-    const skillFills = document.querySelectorAll('.skill-fill');
-    
-    skillFills.forEach((fill, index) => {
-        setTimeout(() => {
-            fill.style.width = fill.style.width || '0%';
-            fill.style.animation = 'skillLoad 2s ease-in-out';
-        }, index * 200);
-    });
-});
-
-// Performance optimization: Throttle scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    }
-}
-
-// Apply throttling to scroll events
-window.addEventListener('scroll', throttle(function() {
-    // Scroll-based animations
-    const scrolled = window.pageYOffset;
-    const parallax = document.querySelector('.neural-bg');
-    if (parallax) {
-        parallax.style.transform = `translateY(${scrolled * 0.1}px)`;
-    }
-}, 16));
 
 // Touch device optimizations
 if ('ontouchstart' in window) {
