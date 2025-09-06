@@ -47,29 +47,6 @@
         // Initialize particle system
         const particleSystem = new ParticleSystem();
 
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const query = this.value.toLowerCase().trim();
-                
-                // Simple search suggestions
-                if (query.includes('project') || query.includes('work')) {
-                    window.location.href = '/#projects';
-                } else if (query.includes('about') || query.includes('bio')) {
-                    window.location.href = '/#about';
-                } else if (query.includes('skill') || query.includes('tech')) {
-                    window.location.href = '/#skills';
-                } else if (query.includes('contact') || query.includes('email')) {
-                    window.location.href = '/#contact';
-                } else if (query.includes('home') || query === '') {
-                    window.location.href = '/';
-                } else {
-                    // If no match, go to home page
-                    window.location.href = '/';
-                }
-            }
-        });
-
         // Add some interactive effects
         document.addEventListener('DOMContentLoaded', function() {
             // Animate elements on load

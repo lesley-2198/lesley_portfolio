@@ -375,6 +375,115 @@ window.addEventListener('load', function() {
     }, 500);
 });
 
+// Project Toggle Functionality
+class ProjectToggle {
+    constructor() {
+        this.toggleButtons = document.querySelectorAll('.project-toggle-btn');
+        this.projectCards = document.querySelectorAll('.project-card');
+        this.currentCategory = 'data-science';
+        this.init();
+    }
+    
+    init() {
+        // Add click listeners to toggle buttons
+        this.toggleButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const category = e.currentTarget.getAttribute('data-category');
+                this.switchCategory(category);
+            });
+        });
+        
+        // Show data science projects by default
+        this.showProjects('data-science');
+    }
+    
+    switchCategory(category) {
+        if (category === this.currentCategory) return;
+        
+        // Update active button
+        this.toggleButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        document.querySelector(`[data-category="${category}"]`).classList.add('active');
+        
+        // Hide current projects with animation
+        this.hideProjects(() => {
+            // Show new projects after hide animation completes
+            setTimeout(() => {
+                this.showProjects(category);
+            }, 250);
+        });
+        
+        this.currentCategory = category;
+    }
+    
+    hideProjects(callback) {
+        const visibleCards = Array.from(this.projectCards).filter(card => 
+            card.style.display !== 'none'
+        );
+        
+        visibleCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('fade-out');
+                card.classList.remove('fade-in');
+                
+                // Hide the card after animation
+                setTimeout(() => {
+                    card.style.display = 'none';
+                    
+                    // Call callback after the last card is hidden
+                    if (index === visibleCards.length - 1) {
+                        if (callback) callback();
+                    }
+                }, 250);
+            }, index * 100);
+        });
+    }
+    
+    showProjects(category) {
+        const categoryCards = Array.from(this.projectCards).filter(card =>
+            card.getAttribute('data-category') === category
+        );
+        
+        categoryCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.display = 'block';
+                card.classList.remove('fade-out');
+                
+                // Trigger reflow to ensure display change takes effect
+                card.offsetHeight;
+                
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, 50);
+            }, index * 100);
+        });
+    }
+}
+
+// Initialize project toggle after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the existing functionality
+    const projectToggle = new ProjectToggle();
+    
+    // Update project counter based on visible projects
+    function updateProjectCounter() {
+        const visibleProjects = document.querySelectorAll('.project-card:not([style*="display: none"])').length;
+        const projectsCountElement = document.getElementById('projects-count');
+        if (projectsCountElement) {
+            animateCounter(projectsCountElement, visibleProjects);
+        }
+    }
+    
+    // Call updateProjectCounter whenever projects are toggled
+    document.querySelectorAll('.project-toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            setTimeout(updateProjectCounter, 600); // Wait for animation to complete
+        });
+    });
+});
+
 // Initialize skill bars with staggered animation
 document.addEventListener('DOMContentLoaded', function() {
     const skillFills = document.querySelectorAll('.skill-fill');

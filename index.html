@@ -113,6 +113,7 @@
             </a>
 
             <div class="nav-menu">
+                <a href="#hero" class="nav-link">Home</a>
                 <a href="#education" class="nav-link">Education</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
@@ -141,7 +142,6 @@
         <p class="hero-subtitle">Transforming data into insights, one algorithm at a time</p>
     </div>
 </section>
-
 
         <!-- Stats Dashboard -->
         <section class="stats-dashboard">
@@ -242,91 +242,121 @@
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="projects-section">
-            <h2 class="section-title"> Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" alt="DataQuest Recommender System" class="project-image">
-                    <h3 class="project-title">DataQuest Recommender System</h3>
-                    <p class="project-description">
-                        Collaborative Filtering + Hybrid Recommender for retail datasets. Built with advanced ML algorithms to provide personalized recommendations.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">R</span>
-                        <span class="tech-tag">Machine Learning</span>
-                        <span class="tech-tag">Collaborative Filtering</span>
-                        <span class="tech-tag">recommenderlab</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/lesley-2198/DataquestRcSys2025.git" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                        <span class="project-status">Completed</span>
-                    </div>
-                </div>
+<section id="projects" class="projects-section">
+    <h2 class="section-title">Featured Projects</h2>
+    
+    <!-- Project Toggle Buttons -->
+    <div class="project-toggle-container">
+        <button class="project-toggle-btn active" data-category="data-science">
+            <i class="fas fa-chart-line"></i>
+            <span>Data Science</span>
+        </button>
+        <button class="project-toggle-btn" data-category="web-dev">
+            <i class="fas fa-code"></i>
+            <span>Web Development</span>
+        </button>
+    </div>
 
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Credit Card Fraud Detection" class="project-image">
-                    <h3 class="project-title">Credit Card Fraud Detection</h3>
-                    <p class="project-description">
-                        Fraud detection using imbalanced classification techniques. Includes R implementation and Power BI dashboards for real-time monitoring.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">R</span>
-                        <span class="tech-tag">Power BI</span>
-                        <span class="tech-tag">Fraud Detection</span>
-                        <span class="tech-tag">Logistic Regression</span>
-                        <span class="tech-tag">SMOTE</span>
-                        <span class="tech-tag">XGBoost</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/lesley-2198/CreditCardFraudDetection.git" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                        <span class="project-status">Work in Progress</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" alt="PropertyQuest" class="project-image">
-                    <h3 class="project-title">PropertyQuest</h3>
-                    <p class="project-description">
-                        Real estate search platform built with Angular & ASP.NET. Features advanced search algorithms and interactive property maps.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Angular</span>
-                        <span class="tech-tag">ASP.NET</span>
-                        <span class="tech-tag">Web Development</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/lesley-2198/PropertyQuest.git" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i> View on GitHub
-                        </a>
-                        <span class="project-status">Work in Progress</span>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Client Portfolio Website" class="project-image">
-                    <h3 class="project-title">Client Portfolio Website</h3>
-                    <p class="project-description">
-                        A polished, responsive portfolio website delivered for a client. Features modern design, SEO optimization, and cross-platform compatibility.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML5</span>
-                        <span class="tech-tag">CSS3</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://bongiwe.netlify.app" class="project-link" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> View Live Site
-                        </a>
-                        <span class="project-status">Completed</span>
-                    </div>
-                </div>
+    <div class="projects-grid">
+        <!-- Data Science Projects -->
+        <div class="project-card" data-category="data-science">
+            <img src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=436&q=80" alt="DataQuest Recommender System" class="project-image">
+            <h3 class="project-title">DataQuest Recommender System</h3>
+            <p class="project-description">
+                Collaborative Filtering + Hybrid Recommender for retail datasets. Built with advanced ML algorithms to provide personalized recommendations.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">R</span>
+                <span class="tech-tag">Machine Learning</span>
+                <span class="tech-tag">Collaborative Filtering</span>
+                <span class="tech-tag">recommenderlab</span>
             </div>
-        </section>
-        
+            <div class="project-links">
+                <a href="https://github.com/lesley-2198/DataquestRcSys2025.git" class="project-link" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <span class="project-status">Completed</span>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="data-science">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Credit Card Fraud Detection" class="project-image">
+            <h3 class="project-title">Credit Card Fraud Detection</h3>
+            <p class="project-description">
+                Fraud detection using imbalanced classification techniques. Includes R implementation and Power BI dashboards for real-time monitoring.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">R</span>
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">Fraud Detection</span>
+                <span class="tech-tag">Logistic Regression</span>
+                <span class="tech-tag">SMOTE</span>
+                <span class="tech-tag">XGBoost</span>
+            </div>
+            <div class="project-links">
+                <a href="https://github.com/lesley-2198/CreditCardFraudDetection.git" class="project-link" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <span class="project-status">Work in Progress</span>
+            </div>
+        </div>
+
+        <!-- Web Development Projects -->
+        <div class="project-card" data-category="web-dev" style="display: none;">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1073&q=80" alt="PropertyQuest" class="project-image">
+            <h3 class="project-title">PropertyQuest</h3>
+            <p class="project-description">
+                Real estate search platform built with Angular & ASP.NET. Features advanced search algorithms and interactive property maps.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">Angular</span>
+                <span class="tech-tag">ASP.NET</span>
+                <span class="tech-tag">Web Development</span>
+            </div>
+            <div class="project-links">
+                <a href="https://github.com/lesley-2198/PropertyQuest.git" class="project-link" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <span class="project-status">Work in Progress</span>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="web-dev" style="display: none;">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Client Portfolio Website" class="project-image">
+            <h3 class="project-title">Client Portfolio Website</h3>
+            <p class="project-description">
+                A polished, responsive portfolio website delivered for a client. Features modern design, SEO optimization, and cross-platform compatibility.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+            </div>
+            <div class="project-links">
+                <a href="https://bongiwe.netlify.app" class="project-link" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> View Live Site
+                </a>
+                <span class="project-status">Completed</span>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="web-dev" style="display: none;">
+            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Personal Portfolio" class="project-image">
+            <h3 class="project-title">Personal Portfolio Website</h3>
+            <p class="project-description">
+                This very portfolio! A modern, interactive website showcasing my work with cyberpunk aesthetics, animations, and responsive design.
+            </p>
+            <div class="project-tech">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">Vanilla JavaScript</span>
+                <span class="tech-tag">Responsive Design</span>
+            </div>
+            
+                <span class="project-status">Completed</span>
+            </div>
+        </div>
+                
         <!-- About Section -->
         <section id="about" class="about-section">
             <div class="about-content">
@@ -369,6 +399,8 @@
         </footer>
     </div>
 
+    </div>
+</section>
     <script src="script.js"></script>
 </body>
 </html>

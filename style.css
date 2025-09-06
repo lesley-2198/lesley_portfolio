@@ -626,6 +626,108 @@ body {
     margin-top: 2px;
 }
 
+/* Project Toggle Buttons */
+.project-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.project-toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(100, 255, 218, 0.3);
+    border-radius: 25px;
+    padding: 12px 24px;
+    color: #8892b0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-toggle-btn:hover {
+    border-color: #64ffda;
+    color: #64ffda;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+}
+
+.project-toggle-btn.active {
+    background: linear-gradient(135deg, rgba(100, 255, 218, 0.2), rgba(100, 255, 218, 0.1));
+    border-color: #64ffda;
+    color: #64ffda;
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+}
+
+.project-toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.project-toggle-btn:hover::before {
+    left: 100%;
+}
+
+.project-toggle-btn i {
+    font-size: 1rem;
+}
+
+/* Project Card Animations for Toggle */
+.project-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card.fade-out {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    pointer-events: none;
+}
+
+.project-card.fade-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+/* Responsive adjustments for toggle buttons */
+@media (max-width: 768px) {
+    .project-toggle-container {
+        gap: 10px;
+    }
+    
+    .project-toggle-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        flex: 1;
+        max-width: 150px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-toggle-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .project-toggle-btn {
+        width: 200px;
+    }
+}
+
 /* Projects Showcase */
 .projects-section {
     margin: 60px 0;
@@ -643,6 +745,8 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 25px;
+    position: relative;
+    min-height: 400px;
 }
 
 .project-card {
@@ -650,12 +754,14 @@ body {
     border: 1px solid rgba(100, 255, 218, 0.2);
     border-radius: 15px;
     padding: 25px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s ease-in-out,
+                transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
+    transform: translateY(0) scale(1);
+    visibility: visible;
 }
 
 .project-card.animate-in {
@@ -729,6 +835,150 @@ body {
     color: #ff6b6b;
     font-size: 0.9rem;
     font-style: italic;
+}
+
+/* Animation States */
+.project-card.fade-out {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.project-card.fade-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.project-card.hidden {
+    display: none;
+}
+
+/* Smooth appear animation for new cards */
+.project-card.appear {
+    animation: smoothAppear 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes smoothAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(-5px) scale(1.01);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Loading state for project grid */
+.projects-grid.transitioning {
+    pointer-events: none;
+}
+
+.projects-grid.transitioning::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(100, 255, 218, 0.3);
+    border-top-color: #64ffda;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    opacity: 0;
+    animation: spin 1s linear infinite, fadeInLoader 0.3s ease-in-out forwards;
+}
+
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes fadeInLoader {
+    to { opacity: 1; }
+}
+
+/* Enhanced Toggle Buttons */
+.project-toggle-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(100, 255, 218, 0.3);
+    border-radius: 25px;
+    padding: 12px 24px;
+    color: #8892b0;
+    cursor: pointer;
+    /* Enhanced transition */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Grid transition helper */
+.projects-grid-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+    .project-card {
+        transition: all 0.3s ease,
+                    opacity 0.4s ease-in-out,
+                    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    .project-card.appear {
+        animation: smoothAppearMobile 0.5s ease-out forwards;
+    }
+    
+    @keyframes smoothAppearMobile {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Counter animation enhancement */
+.project-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.project-toggle-container::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #64ffda, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-toggle-container:hover::before {
+    opacity: 1;
 }
 
 /* Contact Section */
