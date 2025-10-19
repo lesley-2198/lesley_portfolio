@@ -521,3 +521,92 @@ if ('ontouchstart' in window) {
         });
     });
 }
+
+// Portfolio Website Interactive Features
+// Data Scientist & ML Specialist Portfolio
+
+// Scroll to top on page refresh/load
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
+window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0);
+});
+
+// Loading Screen Management
+class LoadingScreen {
+    constructor() {
+        this.loadingScreen = document.getElementById('loading-screen');
+        this.profileImage = document.querySelector('.profile-img');
+        this.minLoadTime = 1500; // Minimum time to show loading screen
+        this.startTime = Date.now();
+        this.imageLoaded = false;
+        this.init();
+    }
+    
+    init() {
+        // Scroll to top immediately
+        window.scrollTo(0, 0);
+        
+        // Preload the profile image
+        if (this.profileImage) {
+            const imgSrc = this.profileImage.src;
+            const img = new Image();
+            
+            img.onload = () => {
+                this.imageLoaded = true;
+                this.checkLoadingComplete();
+            };
+            
+            img.onerror = () => {
+                this.imageLoaded = true;
+                this.checkLoadingComplete();
+            };
+            
+            img.src = imgSrc;
+        } else {
+            this.imageLoaded = true;
+        }
+        
+        // Also wait for window load
+        window.addEventListener('load', () => {
+            this.checkLoadingComplete();
+        });
+        
+        // Fallback - hide loading screen after maximum time
+        setTimeout(() => {
+            this.hideLoadingScreen();
+        }, 5000);
+    }
+    
+    checkLoadingComplete() {
+        const elapsedTime = Date.now() - this.startTime;
+        const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
+        
+        if (this.imageLoaded) {
+            setTimeout(() => {
+                this.hideLoadingScreen();
+            }, remainingTime);
+        }
+    }
+    
+    hideLoadingScreen() {
+        if (this.loadingScreen) {
+            this.loadingScreen.classList.add('hidden');
+            document.body.style.overflow = '';
+            
+            // Remove loading screen from DOM after transition
+            setTimeout(() => {
+                if (this.loadingScreen.parentNode) {
+                    this.loadingScreen.remove();
+                }
+            }, 500);
+        }
+    }
+}
+
+// Initialize loading screen
+const loadingScreen = new LoadingScreen();
+
+// Animated counter for stats
