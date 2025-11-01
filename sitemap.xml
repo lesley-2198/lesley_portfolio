@@ -1,9 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
   <url>
     <loc>https://lesleyngcobo.netlify.app/</loc>
-    <lastmod>2025-08-23</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://lesleyngcobo.netlify.app/files/lezz.jpg</image:loc>
+      <image:title>Lesley Ngcobo - Data Scientist Profile</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Section Deep Links -->
+  <url>
+    <loc>https://lesleyngcobo.netlify.app/#education</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://lesleyngcobo.netlify.app/#skills</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://lesleyngcobo.netlify.app/#projects</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://lesleyngcobo.netlify.app/#about</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://lesleyngcobo.netlify.app/#contact</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Resume PDF -->
+  <url>
+    <loc>https://lesleyngcobo.netlify.app/files/Lesley%20Ngcobo%20-%20Resume.pdf</loc>
+    <lastmod>2025-11-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
