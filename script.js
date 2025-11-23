@@ -110,18 +110,19 @@ function animateCounter(element, target, duration = 2000) {
 
 // Initialize counters when page loads
 window.addEventListener('load', () => {
-    animateCounter(document.getElementById('projects-count'), 5);
+    animateCounter(document.getElementById('projects-count'), 8);
     animateCounter(document.getElementById('datasets-count'), 10);
-    animateCounter(document.getElementById('models-count'), 15);
-    animateCounter(document.getElementById('accuracy-rate'), 94);
+    animateCounter(document.getElementById('models-count'), 3);
+    animateCounter(document.getElementById('accuracy-rate'), 100);
 });
 
 // Typing animation for hero title
 const titles = [
-    "Data Scientist ",
-    "Data Analist ", 
-    "Problem Solver ",
-    "Data Storyteller "
+    "Frontend Developer",
+    "Full-Stack Developer",
+    "Software Engineer",
+    "Angular Specialist",
+    "Data Scientist"
 ];
 let titleIndex = 0;
 let charIndex = 0;
@@ -507,7 +508,7 @@ class ProjectToggle {
     constructor() {
         this.toggleButtons = document.querySelectorAll('.project-toggle-btn');
         this.projectCards = document.querySelectorAll('.project-card');
-        this.currentCategory = 'data-science';
+        this.currentCategory = 'web-dev';
         this.init();
     }
     
@@ -520,8 +521,8 @@ class ProjectToggle {
             });
         });
         
-        // Show data science projects by default
-        this.showProjects('data-science');
+        // Show web development projects by default
+        this.showProjects('web-dev');
     }
     
     switchCategory(category) {
@@ -534,12 +535,23 @@ class ProjectToggle {
         
         document.querySelector(`[data-category="${category}"]`).classList.add('active');
         
+        // Add transitioning class to grid to maintain layout
+        const projectsGrid = document.getElementById('projectsGrid');
+        if (projectsGrid) {
+            projectsGrid.classList.add('transitioning');
+        }
+        
         // Hide current projects with animation
         this.hideProjects(() => {
-            // Show new projects after hide animation completes
+            // Show new projects immediately after hide completes
+            this.showProjects(category);
+            
+            // Remove transitioning class after animation completes
             setTimeout(() => {
-                this.showProjects(category);
-            }, 250);
+                if (projectsGrid) {
+                    projectsGrid.classList.remove('transitioning');
+                }
+            }, 600);
         });
         
         this.currentCategory = category;
@@ -547,25 +559,28 @@ class ProjectToggle {
     
     hideProjects(callback) {
         const visibleCards = Array.from(this.projectCards).filter(card => 
-            card.style.display !== 'none'
+            card.style.display !== 'none' && 
+            !card.classList.contains('fade-out')
         );
         
-        visibleCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.classList.add('fade-out');
-                card.classList.remove('fade-in');
-                
-                // Hide the card after animation
-                setTimeout(() => {
-                    card.style.display = 'none';
-                    
-                    // Call callback after the last card is hidden
-                    if (index === visibleCards.length - 1) {
-                        if (callback) callback();
-                    }
-                }, 250);
-            }, index * 100);
+        if (visibleCards.length === 0) {
+            if (callback) callback();
+            return;
+        }
+        
+        // Add fade-out class to all cards simultaneously for smoother transition
+        visibleCards.forEach((card) => {
+            card.classList.add('fade-out');
+            card.classList.remove('fade-in');
         });
+        
+        // Wait for animation to complete, then hide and call callback
+        setTimeout(() => {
+            visibleCards.forEach(card => {
+                card.style.display = 'none';
+            });
+            if (callback) callback();
+        }, 450); // Match CSS transition duration (400ms) + small buffer
     }
     
     showProjects(category) {
@@ -573,18 +588,28 @@ class ProjectToggle {
             card.getAttribute('data-category') === category
         );
         
+        if (categoryCards.length === 0) return;
+        
+        // Set display first, then animate in with staggered effect
         categoryCards.forEach((card, index) => {
+            card.style.display = 'block';
+            card.classList.remove('fade-out');
+            card.classList.remove('fade-in');
+            
+            // Force reflow
+            card.offsetHeight;
+            
+            // Staggered fade-in animation for visual appeal
             setTimeout(() => {
-                card.style.display = 'block';
-                card.classList.remove('fade-out');
+                card.classList.add('fade-in');
                 
-                // Trigger reflow to ensure display change takes effect
-                card.offsetHeight;
-                
-                setTimeout(() => {
-                    card.classList.add('fade-in');
-                }, 50);
-            }, index * 100);
+                // Check layout after all cards are shown
+                if (index === categoryCards.length - 1 && projectsScrollInstance) {
+                    setTimeout(() => {
+                        projectsScrollInstance.checkAndUpdateLayout();
+                    }, 550); // After animation completes
+                }
+            }, index * 80); // Reduced stagger for smoother feel
         });
     }
 }
@@ -604,6 +629,250 @@ if ('ontouchstart' in window) {
             this.style.transform = 'scale(1)';
         });
     });
+}
+
+// Skills Section Horizontal Scroll with Buttons
+class SkillsScroll {
+    constructor() {
+        this.skillsGrid = document.getElementById('skillsGrid');
+        this.scrollLeftBtn = document.querySelector('.skills-scroll-left');
+        this.scrollRightBtn = document.querySelector('.skills-scroll-right');
+        this.scrollAmount = 0; // Will be calculated dynamically
+        
+        if (this.skillsGrid && this.scrollLeftBtn && this.scrollRightBtn) {
+            this.calculateScrollAmount();
+            this.init();
+        }
+    }
+    
+    calculateScrollAmount() {
+        // Calculate scroll amount based on first card width + gap
+        const firstCard = this.skillsGrid.querySelector('.skill-category');
+        if (firstCard) {
+            const cardWidth = firstCard.offsetWidth;
+            const gap = 30; // Match CSS gap
+            this.scrollAmount = cardWidth + gap;
+        } else {
+            this.scrollAmount = 350; // Fallback
+        }
+    }
+    
+    init() {
+        // Add click listeners to scroll buttons
+        this.scrollLeftBtn.addEventListener('click', () => this.scroll('left'));
+        this.scrollRightBtn.addEventListener('click', () => this.scroll('right'));
+        
+        // Update button states on scroll
+        this.skillsGrid.addEventListener('scroll', () => this.updateButtonStates());
+        
+        // Initial button state update
+        this.updateButtonStates();
+        
+        // Show/hide buttons based on scroll position and screen size
+        window.addEventListener('resize', () => {
+            this.calculateScrollAmount();
+            this.updateButtonStates();
+        });
+    }
+    
+    scroll(direction) {
+        if (!this.skillsGrid) return;
+        
+        const currentScroll = this.skillsGrid.scrollLeft;
+        const scrollDirection = direction === 'left' ? -this.scrollAmount : this.scrollAmount;
+        const targetScroll = currentScroll + scrollDirection;
+        
+        this.skillsGrid.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    }
+    
+    updateButtonStates() {
+        if (!this.skillsGrid || !this.scrollLeftBtn || !this.scrollRightBtn) return;
+        
+        const { scrollLeft, scrollWidth, clientWidth } = this.skillsGrid;
+        const isAtStart = scrollLeft <= 10;
+        const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 10;
+        
+        // Update left button
+        this.scrollLeftBtn.disabled = isAtStart;
+        if (isAtStart) {
+            this.scrollLeftBtn.style.opacity = '0.3';
+        } else {
+            this.scrollLeftBtn.style.opacity = '1';
+        }
+        
+        // Update right button
+        this.scrollRightBtn.disabled = isAtEnd;
+        if (isAtEnd) {
+            this.scrollRightBtn.style.opacity = '0.3';
+        } else {
+            this.scrollRightBtn.style.opacity = '1';
+        }
+        
+        // Show/hide buttons on mobile (show only if content overflows)
+        if (window.innerWidth <= 768) {
+            const hasOverflow = scrollWidth > clientWidth;
+            this.scrollLeftBtn.style.display = hasOverflow ? 'none' : 'none';
+            this.scrollRightBtn.style.display = hasOverflow ? 'none' : 'none';
+        } else {
+            this.scrollLeftBtn.style.display = 'flex';
+            this.scrollRightBtn.style.display = 'flex';
+        }
+    }
+}
+
+// Initialize skills scroll when DOM is ready
+let projectsScrollInstance = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const skillsScroll = new SkillsScroll();
+    projectsScrollInstance = new ProjectsScroll();
+});
+
+// Projects Section Horizontal Scroll with Buttons (only when more than 3 projects)
+class ProjectsScroll {
+    constructor() {
+        this.projectsGrid = document.getElementById('projectsGrid');
+        this.scrollLeftBtn = document.querySelector('.projects-scroll-left');
+        this.scrollRightBtn = document.querySelector('.projects-scroll-right');
+        this.scrollAmount = 0;
+        this.minProjectsForScroll = 3;
+        
+        if (this.projectsGrid && this.scrollLeftBtn && this.scrollRightBtn) {
+            this.init();
+        }
+    }
+    
+    init() {
+        // Check and update layout on load
+        this.checkAndUpdateLayout();
+        
+        // Add click listeners to scroll buttons
+        this.scrollLeftBtn.addEventListener('click', () => this.scroll('left'));
+        this.scrollRightBtn.addEventListener('click', () => this.scroll('right'));
+        
+        // Update button states on scroll
+        this.projectsGrid.addEventListener('scroll', () => this.updateButtonStates());
+        
+        // Watch for project category changes
+        this.observeProjectChanges();
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            this.checkAndUpdateLayout();
+            this.calculateScrollAmount();
+            this.updateButtonStates();
+        });
+    }
+    
+    getVisibleProjects() {
+        return Array.from(this.projectsGrid.querySelectorAll('.project-card')).filter(card => {
+            return card.style.display !== 'none' && 
+                   !card.classList.contains('hidden') &&
+                   window.getComputedStyle(card).display !== 'none';
+        });
+    }
+    
+    checkAndUpdateLayout() {
+        const visibleProjects = this.getVisibleProjects();
+        const shouldScroll = visibleProjects.length > this.minProjectsForScroll;
+        
+        if (shouldScroll) {
+            // Enable horizontal scrolling
+            this.projectsGrid.classList.add('scrollable');
+            this.calculateScrollAmount();
+            this.updateButtonStates();
+            
+            // Show buttons on desktop
+            if (window.innerWidth > 768) {
+                this.scrollLeftBtn.classList.add('visible');
+                this.scrollRightBtn.classList.add('visible');
+            }
+        } else {
+            // Use grid layout
+            this.projectsGrid.classList.remove('scrollable');
+            this.scrollLeftBtn.classList.remove('visible');
+            this.scrollRightBtn.classList.remove('visible');
+        }
+    }
+    
+    calculateScrollAmount() {
+        if (!this.projectsGrid.classList.contains('scrollable')) return;
+        
+        const firstCard = this.projectsGrid.querySelector('.project-card:not([style*="display: none"])');
+        if (firstCard) {
+            const cardWidth = firstCard.offsetWidth;
+            const gap = 25; // Match CSS gap
+            this.scrollAmount = cardWidth + gap;
+        } else {
+            this.scrollAmount = 400; // Fallback
+        }
+    }
+    
+    scroll(direction) {
+        if (!this.projectsGrid || !this.projectsGrid.classList.contains('scrollable')) return;
+        
+        const currentScroll = this.projectsGrid.scrollLeft;
+        const scrollDirection = direction === 'left' ? -this.scrollAmount : this.scrollAmount;
+        const targetScroll = currentScroll + scrollDirection;
+        
+        this.projectsGrid.scrollTo({
+            left: targetScroll,
+            behavior: 'smooth'
+        });
+    }
+    
+    updateButtonStates() {
+        if (!this.projectsGrid || !this.projectsGrid.classList.contains('scrollable')) {
+            return;
+        }
+        
+        const { scrollLeft, scrollWidth, clientWidth } = this.projectsGrid;
+        const isAtStart = scrollLeft <= 10;
+        const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 10;
+        
+        // Update left button
+        this.scrollLeftBtn.disabled = isAtStart;
+        if (isAtStart) {
+            this.scrollLeftBtn.style.opacity = '0.3';
+        } else {
+            this.scrollLeftBtn.style.opacity = '1';
+        }
+        
+        // Update right button
+        this.scrollRightBtn.disabled = isAtEnd;
+        if (isAtEnd) {
+            this.scrollRightBtn.style.opacity = '0.3';
+        } else {
+            this.scrollRightBtn.style.opacity = '1';
+        }
+        
+        // Hide buttons on mobile
+        if (window.innerWidth <= 768) {
+            this.scrollLeftBtn.classList.remove('visible');
+            this.scrollRightBtn.classList.remove('visible');
+        }
+    }
+    
+    observeProjectChanges() {
+        // Watch for changes when project toggle happens
+        const observer = new MutationObserver(() => {
+            setTimeout(() => {
+                this.checkAndUpdateLayout();
+            }, 100); // Small delay to ensure display changes are applied
+        });
+        
+        if (this.projectsGrid) {
+            observer.observe(this.projectsGrid, {
+                childList: true,
+                attributes: true,
+                attributeFilter: ['style', 'class'],
+                subtree: true
+            });
+        }
+    }
 }
 
 

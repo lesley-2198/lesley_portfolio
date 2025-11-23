@@ -1,4 +1,6 @@
 # Robots.txt for Lesley Ngcobo Portfolio
+# Software Developer & Data Scientist Portfolio
+
 User-agent: *
 Allow: /
 Disallow: /404.html
@@ -16,4 +18,7 @@ User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
 Allow: /

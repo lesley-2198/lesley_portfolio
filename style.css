@@ -131,6 +131,7 @@ body {
     font-size: 1.2rem;
     font-weight: 600;
     color: #64ffda;
+    transition: color 0.3s ease;
 }
 
 .nav-menu {
@@ -164,6 +165,11 @@ body {
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
 }
 
 .nav-toggle {
@@ -231,7 +237,7 @@ body {
     border: 4px solid #64ffda;
     margin: 0 auto 30px;
     box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hero-name {
@@ -244,6 +250,7 @@ body {
     background-clip: text;
     animation: gradientShift 4s ease-in-out infinite;
     margin-bottom: 20px;
+    transition: background 0.3s ease;
 }
 
 .hero-title {
@@ -251,6 +258,7 @@ body {
     color: #64ffda;
     margin-bottom: 20px;
     min-height: 2.5rem;
+    transition: color 0.3s ease;
 }
 
 .cursor {
@@ -263,6 +271,7 @@ body {
     color: #8892b0;
     font-weight: 300;
     margin-bottom: 40px;
+    transition: color 0.3s ease;
 }
 
 @keyframes gradientShift {
@@ -290,7 +299,7 @@ body {
     border-radius: 15px;
     padding: 25px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -320,6 +329,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     color: #64ffda;
+    transition: color 0.3s ease;
     display: block;
 }
 
@@ -327,6 +337,7 @@ body {
     color: #8892b0;
     font-size: 0.9rem;
     margin-top: 5px;
+    transition: color 0.3s ease;
 }
 
 /* About Section */
@@ -357,6 +368,7 @@ body {
     color: #a8b2d1;
     margin-bottom: 15px;
     line-height: 1.8;
+    transition: color 0.3s ease;
 }
 
 .tech-stack {
@@ -367,7 +379,7 @@ body {
 }
 
 .tech-item {
-    background: rgba(100, 255, 218, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     color: #64ffda;
     padding: 8px 16px;
     border-radius: 20px;
@@ -375,7 +387,8 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    border: 1px solid rgba(100, 255, 218, 0.3);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 /* Skills Visualization */
@@ -398,6 +411,7 @@ body {
     text-align: center;
     margin-bottom: 40px;
     position: relative;
+    transition: color 0.3s ease;
 }
 
 .section-title::after {
@@ -411,20 +425,112 @@ body {
     background: linear-gradient(90deg, #64ffda, #ff6b6b);
 }
 
+.skills-scroll-container {
+    position: relative;
+    width: 100%;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
     gap: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 255, 218, 0.3) transparent;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 0;
+    width: 100%;
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.skills-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.skills-grid {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.skills-scroll-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    color: #64ffda;
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 10;
+    position: relative;
+}
+
+/* Show buttons on desktop, hide on mobile */
+@media (min-width: 769px) {
+    .skills-scroll-btn {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .skills-scroll-btn {
+        display: none !important;
+    }
+}
+
+.skills-scroll-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #64ffda;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+}
+
+.skills-scroll-btn:active {
+    transform: scale(0.95);
+}
+
+.skills-scroll-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.skills-scroll-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(100, 255, 218, 0.2);
+    transform: none;
+    box-shadow: none;
+}
+
+.skills-scroll-btn i {
+    font-size: 1.2rem;
 }
 
 .skill-category {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 30px;
-    border: 1px solid rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: background 0.3s ease, border-color 0.3s ease;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s ease;
+    flex: 0 0 auto;
+    min-width: 300px;
+    max-width: 350px;
+    width: 100%;
 }
 
 .skill-category.animate-in {
@@ -439,6 +545,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: color 0.3s ease;
 }
 
 .skill-name {
@@ -450,16 +557,17 @@ body {
 
 .skill-progress {
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 4px;
     overflow: hidden;
+    transition: background 0.3s ease;
 }
 
 .skill-fill {
     height: 100%;
     background: linear-gradient(90deg, #64ffda, #4ecdc4);
     border-radius: 4px;
-    transition: width 2s ease-in-out;
+    transition: width 2s ease-in-out, background 0.3s ease;
     animation: skillLoad 2s ease-in-out;
 }
 
@@ -469,21 +577,21 @@ body {
 
 /* Qualification Section */
 .qualification-section {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: 30px;
-    border: 1px solid rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.2);
     margin-bottom: 40px;
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease;
+    transition: all 0.8s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
 }
 
 .qualification-section:hover {
     transform: translateY(-5px);
     border-color: rgba(100, 255, 218, 0.3);
-    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+    box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
 }
 
 .qualification-section.animate-in {
@@ -496,6 +604,7 @@ body {
     color: #64ffda;
     margin-bottom: 20px;
     display: flex;
+    transition: color 0.3s ease;
     align-items: center;
     justify-content: center;
     gap: 12px;
@@ -520,9 +629,10 @@ body {
 
 .degree-info h4 {
     font-size: 1.4rem;
-    color: #ffffff;
+    color: #e0e6ed;
     margin-bottom: 15px;
     font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 .degree-info p {
@@ -533,11 +643,13 @@ body {
     justify-content: center;
     gap: 8px;
     font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
 .degree-info i {
     color: #64ffda;
     font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 /* Certificates Section */
@@ -545,6 +657,7 @@ body {
     margin-top: 30px;
     padding-top: 25px;
     border-top: 1px solid rgba(100, 255, 218, 0.2);
+    transition: border-color 0.3s ease;
 }
 
 .certificates-title {
@@ -554,6 +667,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.3s ease;
     gap: 10px;
     font-weight: 600;
 }
@@ -574,24 +688,24 @@ body {
 }
 
 .certificate-btn {
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
-    border: 1px solid rgba(255, 107, 107, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(100, 255, 218, 0.2);
     border-radius: 12px;
     padding: 15px 50px;
     text-decoration: none;
-    color: #ffffff;
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    color: #e0e6ed;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     text-align: center;
 }
 
 .certificate-btn:hover {
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 107, 107, 0.1));
+    background: rgba(255, 255, 255, 0.05);
     border-color: #ff6b6b;
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.2);
@@ -616,20 +730,23 @@ body {
     color: #ff6b6b;
     font-size: 1.3rem;
     margin-bottom: 5px;
+    transition: color 0.3s ease;
 }
 
 .certificate-btn span {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #ffffff;
+    color: #e0e6ed;
     line-height: 1.2;
+    transition: color 0.3s ease;
 }
 
 .certificate-btn small {
     font-size: 0.8rem;
-    color: #a8b2d1;
+    color: #8892b0;
     font-weight: 400;
     margin-top: 2px;
+    transition: color 0.3s ease;
 }
 
 /* Project Toggle Buttons */
@@ -665,6 +782,7 @@ body {
     border-radius: 25px;
     padding: 12px 24px;
     color: #8892b0;
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.9rem;
@@ -680,11 +798,11 @@ body {
     border-color: #64ffda;
     color: #64ffda;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
 }
 
 .project-toggle-btn.active {
-    background: linear-gradient(135deg, rgba(100, 255, 218, 0.2), rgba(100, 255, 218, 0.1));
+    background: rgba(255, 255, 255, 0.05);
     border-color: #64ffda;
     color: #64ffda;
     box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
@@ -723,17 +841,58 @@ body {
     transform: translateY(0);
 }
 
+.projects-scroll-container {
+    position: relative;
+    width: 100%;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 25px;
     position: relative;
     min-height: 400px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; /* Prevent layout shift during transitions */
+}
+
+/* Maintain grid height during transitions to prevent layout shift */
+.projects-grid.transitioning {
+    min-height: auto;
+    height: auto;
+}
+
+/* Horizontal scroll layout when more than 3 projects */
+.projects-grid.scrollable {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 0;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.projects-grid.scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+.projects-grid.scrollable {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .project-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: background 0.3s ease, border-color 0.3s ease, all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 15px;
     padding: 25px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -742,9 +901,65 @@ body {
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(0) scale(1);
-    visibility: visible;
+}
+
+/* When in scrollable mode, cards have fixed width */
+.projects-grid.scrollable .project-card {
+    flex: 0 0 auto;
+    min-width: 350px;
+    max-width: 400px;
     width: 100%;
+    scroll-snap-align: start;
+}
+
+.projects-scroll-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    color: #64ffda;
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none; /* Hidden by default, shown when needed */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    z-index: 10;
+    position: relative;
+}
+
+.projects-scroll-btn.visible {
+    display: flex;
+}
+
+.projects-scroll-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #64ffda;
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+}
+
+.projects-scroll-btn:active {
+    transform: scale(0.95);
+}
+
+.projects-scroll-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.projects-scroll-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(100, 255, 218, 0.2);
+    transform: none;
+    box-shadow: none;
+}
+
+.projects-scroll-btn i {
+    font-size: 1.2rem;
 }
 
 .project-card.animate-in {
@@ -787,12 +1002,13 @@ body {
 }
 
 .tech-tag {
-    background: rgba(100, 255, 218, 0.1);
+    background: rgba(255, 255, 255, 0.05);
     color: #64ffda;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
-    border: 1px solid rgba(100, 255, 218, 0.3);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .project-links {
@@ -818,21 +1034,28 @@ body {
     color: #ff6b6b;
     font-size: 0.9rem;
     font-style: italic;
+    transition: color 0.3s ease;
 }
 
 /* Animation States */
 .project-card.fade-out {
-    opacity: 0;
-    transform: translateY(-30px) scale(0.9);
+    opacity: 0 !important;
+    transform: translateY(-20px) scale(0.95) !important;
     visibility: hidden;
     pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.4s ease;
 }
 
 .project-card.fade-in {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
     visibility: visible;
     pointer-events: auto;
+    transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1),
+                visibility 0.5s ease;
 }
 
 .project-card.hidden {
@@ -893,9 +1116,10 @@ body {
     text-align: center;
     margin: 60px 0;
     padding: 40px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
-    border: 1px solid rgba(100, 255, 218, 0.1);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: background 0.3s ease, border-color 0.3s ease;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s ease;
@@ -922,7 +1146,8 @@ body {
     color: #64ffda;
     text-decoration: none;
     padding: 12px 20px;
-    border: 1px solid rgba(100, 255, 218, 0.3);
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    transition: all 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     border-radius: 25px;
     transition: all 0.3s ease;
 }
@@ -938,9 +1163,8 @@ body {
     padding: 20px;
     color: #8892b0;
     font-size: 0.9rem;
-    border-top: 1px solid rgba(100, 255, 218, 0.1);
-    margin-top: 40px;
-    width: 100%;
+    border-top: 1px solid rgba(100, 255, 218, 0.2);
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Responsive Design */
@@ -991,12 +1215,47 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .skills-scroll-container {
+        gap: 10px;
+    }
+    
+    .skills-scroll-btn {
+        width: 40px;
+        height: 40px;
+        display: none !important; /* Hide buttons on mobile, use touch scroll */
+    }
+    
     .skills-grid {
-        grid-template-columns: 1fr;
+        padding: 10px 0;
+        /* Enhanced touch scrolling on mobile */
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .skill-category {
+        min-width: 280px;
+        max-width: 320px;
+        scroll-snap-align: start;
     }
     
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .projects-grid.scrollable {
+        padding: 10px 0;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .projects-grid.scrollable .project-card {
+        min-width: 300px;
+        max-width: 350px;
+    }
+    
+    .projects-scroll-btn {
+        width: 40px;
+        height: 40px;
+        display: none !important; /* Hide buttons on mobile, use touch scroll */
     }
     
     .contact-links {
@@ -1090,6 +1349,7 @@ body {
     .nav-menu.active {
         background: rgba(15, 15, 35, 0.98);
     }
+    
 }
 
 /* Smooth scrolling for iOS */
