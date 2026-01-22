@@ -1,5 +1,5 @@
 // Portfolio Website Interactive Features
-// Data Scientist & ML Specialist Portfolio
+// Graduate Software Engineer Portfolio
 
 // Scroll to top on page refresh/load
 if (history.scrollRestoration) {
@@ -10,14 +10,12 @@ window.addEventListener('beforeunload', function() {
     window.scrollTo(0, 0);
 });
 
-// Loading Screen Management
+// Loading Screen Management - SIMPLIFIED
 class LoadingScreen {
     constructor() {
         this.loadingScreen = document.getElementById('loading-screen');
-        this.profileImage = document.querySelector('.profile-img');
-        this.minLoadTime = 2000; // Minimum time to show loading screen
+        this.minLoadTime = 1500; // Reduced minimum load time
         this.startTime = Date.now();
-        this.imageLoaded = false;
         this.init();
     }
     
@@ -25,56 +23,35 @@ class LoadingScreen {
         // Scroll to top immediately
         window.scrollTo(0, 0);
         
-        // Preload the profile image
-        if (this.profileImage) {
-            const imgSrc = this.profileImage.src;
-            const img = new Image();
-            
-            img.onload = () => {
-                this.imageLoaded = true;
-                this.checkLoadingComplete();
-            };
-            
-            img.onerror = () => {
-                this.imageLoaded = true;
-                this.checkLoadingComplete();
-            };
-            
-            img.src = imgSrc;
-        } else {
-            this.imageLoaded = true;
-        }
-        
-        // Also wait for window load
-        window.addEventListener('load', () => {
-            this.checkLoadingComplete();
-        });
-        
-        // Fallback - hide loading screen after maximum time
+        // Hide loading screen after minimum time
         setTimeout(() => {
             this.hideLoadingScreen();
-        }, 7000);
-    }
-    
-    checkLoadingComplete() {
-        const elapsedTime = Date.now() - this.startTime;
-        const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
+        }, this.minLoadTime);
         
-        if (this.imageLoaded) {
+        // Also hide on window load (whichever comes first)
+        window.addEventListener('load', () => {
+            const elapsedTime = Date.now() - this.startTime;
+            const remainingTime = Math.max(0, this.minLoadTime - elapsedTime);
+            
             setTimeout(() => {
                 this.hideLoadingScreen();
             }, remainingTime);
-        }
+        });
+        
+        // Force hide after maximum time
+        setTimeout(() => {
+            this.hideLoadingScreen();
+        }, 4000);
     }
     
     hideLoadingScreen() {
-        if (this.loadingScreen) {
+        if (this.loadingScreen && !this.loadingScreen.classList.contains('hidden')) {
             this.loadingScreen.classList.add('hidden');
             document.body.style.overflow = '';
             
             // Remove loading screen from DOM after transition
             setTimeout(() => {
-                if (this.loadingScreen.parentNode) {
+                if (this.loadingScreen && this.loadingScreen.parentNode) {
                     this.loadingScreen.remove();
                 }
             }, 500);
@@ -82,11 +59,13 @@ class LoadingScreen {
     }
 }
 
-// Initialize loading screen
+// Initialize loading screen immediately
 const loadingScreen = new LoadingScreen();
 
 // Animated counter for stats
 function animateCounter(element, target, duration = 2000) {
+    if (!element) return;
+    
     const start = 0;
     const increment = target / (duration / 16);
     let current = start;
@@ -109,16 +88,23 @@ function animateCounter(element, target, duration = 2000) {
 }
 
 // Initialize counters when page loads
-window.addEventListener('load', () => {
-    animateCounter(document.getElementById('projects-count'), 8);
-    animateCounter(document.getElementById('datasets-count'), 10);
-    animateCounter(document.getElementById('models-count'), 3);
-    animateCounter(document.getElementById('accuracy-rate'), 100);
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        const projectsCount = document.getElementById('projects-count');
+        const datasetsCount = document.getElementById('datasets-count');
+        const modelsCount = document.getElementById('models-count');
+        const accuracyRate = document.getElementById('accuracy-rate');
+        
+        if (projectsCount) animateCounter(projectsCount, 8);
+        if (datasetsCount) animateCounter(datasetsCount, 10);
+        if (modelsCount) animateCounter(modelsCount, 4);
+        if (accuracyRate) animateCounter(accuracyRate, 100);
+    }, 500);
 });
 
 // Typing animation for hero title
 const titles = [
-    "Frontend Developer",
+    "Graduate Software Engineer",
     "Full-Stack Developer",
     "Software Engineer",
     "Angular Specialist",
@@ -127,9 +113,10 @@ const titles = [
 let titleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
-const typingElement = document.getElementById('typing-text');
+let typingTimeout;
 
 function typeTitle() {
+    const typingElement = document.getElementById('typing-text');
     if (!typingElement) return;
     
     const currentTitle = titles[titleIndex];
@@ -154,17 +141,19 @@ function typeTitle() {
     
     // Set typing speed
     const speed = isDeleting ? 50 : 100;
-    setTimeout(typeTitle, speed);
+    typingTimeout = setTimeout(typeTitle, speed);
 }
 
 // Start typing animation after a delay
-setTimeout(typeTitle, 1000);
+setTimeout(() => {
+    typeTitle();
+}, 1000);
 
 // Enhanced floating particles system
 class ParticleSystem {
     constructor() {
         this.particles = [];
-        this.maxParticles = 150;
+        this.maxParticles = 100; // Reduced for performance
         this.init();
     }
     
@@ -179,7 +168,7 @@ class ParticleSystem {
             if (this.particles.length < this.maxParticles) {
                 this.createParticle();
             }
-        }, 800);
+        }, 1000);
     }
     
     createParticle() {
@@ -189,16 +178,16 @@ class ParticleSystem {
         // Random positioning and sizing
         particle.style.left = Math.random() * 100 + 'vw';
         particle.style.top = Math.random() * 100 + 'vh';
-        const size = Math.random() * 8 + 2;
+        const size = Math.random() * 4 + 1; // Smaller particles
         particle.style.width = size + 'px';
         particle.style.height = size + 'px';
         
         // Random animation properties
-        particle.style.animationDuration = (Math.random() * 5 + 3) + 's';
-        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 2) + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
         
         // Random opacity
-        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        particle.style.opacity = Math.random() * 0.3 + 0.1;
         
         document.body.appendChild(particle);
         
@@ -211,12 +200,14 @@ class ParticleSystem {
                 particle.parentNode.removeChild(particle);
                 this.particles = this.particles.filter(p => p !== particle);
             }
-        }, 10000);
+        }, 8000);
     }
 }
 
-// Initialize particle system
-const particleSystem = new ParticleSystem();
+// Initialize particle system after page loads
+document.addEventListener('DOMContentLoaded', () => {
+    const particleSystem = new ParticleSystem();
+});
 
 // Navigation functionality
 class Navigation {
@@ -224,9 +215,6 @@ class Navigation {
         this.navHeader = document.querySelector('.nav-header');
         this.navToggle = document.querySelector('.nav-toggle');
         this.navMenu = document.querySelector('.nav-menu');
-        this.heroSection = document.querySelector('.hero');
-        this.lastScrollY = 0;
-        this.isScrolling = false;
         this.isMenuOpen = false;
         
         this.init();
@@ -258,7 +246,7 @@ class Navigation {
         
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!this.navHeader.contains(e.target)) {
+            if (this.isMenuOpen && !this.navHeader.contains(e.target)) {
                 this.closeMenu();
             }
         });
@@ -272,28 +260,19 @@ class Navigation {
     }
     
     handleScroll() {
-        this.heroSection = document.querySelector('.hero');
-        this.navHeader = document.querySelector('.nav-header');
+        if (!this.navHeader) return;
+        
+        const heroSection = document.querySelector('.hero');
+        if (!heroSection) return;
+        
+        const currentScrollY = window.pageYOffset;
+        const heroHeight = heroSection.offsetHeight;
 
-        if (this.isScrolling) return;
-
-        this.isScrolling = true;
-        requestAnimationFrame(() => {
-            const currentScrollY = window.pageYOffset;
-
-            // Get hero section height
-            const heroHeight = this.heroSection.offsetHeight;
-
-            if (currentScrollY >= heroHeight) {
-                // Past hero section → show nav
-                this.navHeader.classList.add('nav-visible');
-            } else {
-                // Back in hero section → hide nav
-                this.navHeader.classList.remove('nav-visible');
-            }
-
-            this.isScrolling = false;
-        });
+        if (currentScrollY >= heroHeight) {
+            this.navHeader.classList.add('nav-visible');
+        } else {
+            this.navHeader.classList.remove('nav-visible');
+        }
     }
     
     toggleMenu() {
@@ -302,7 +281,7 @@ class Navigation {
         if (this.isMenuOpen) {
             this.navToggle.classList.add('active');
             this.navMenu.classList.add('active');
-            // Prevent body scroll when menu is open
+            this.navToggle.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
         } else {
             this.closeMenu();
@@ -314,13 +293,14 @@ class Navigation {
         this.navToggle.classList.remove('active');
         this.navToggle.setAttribute('aria-expanded', 'false');
         this.navMenu.classList.remove('active');
-        // Restore body scroll
         document.body.style.overflow = '';
     }
 }
 
 // Initialize navigation
-const navigation = new Navigation();
+document.addEventListener('DOMContentLoaded', () => {
+    const navigation = new Navigation();
+});
 
 // Scroll animations
 class ScrollAnimations {
@@ -350,22 +330,14 @@ class ScrollAnimations {
 }
 
 // Initialize scroll animations
-const scrollAnimations = new ScrollAnimations();
-
-// Intersection Observer for skill bars animation
-const skillBars = document.querySelectorAll('.skill-fill');
-const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'skillLoad 2s ease-in-out';
-        }
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollAnimations = new ScrollAnimations();
 });
 
-skillBars.forEach(bar => skillObserver.observe(bar));
-
-// Combined DOMContentLoaded event listener
+// Combined DOMContentLoaded event listener for all interactions
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded, initializing interactions...');
+    
     // Add hover effects to stat cards
     document.querySelectorAll('.stat-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -410,51 +382,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Initialize project toggle
+    // Initialize project toggle with "All" option
     const projectToggle = new ProjectToggle();
     
-    // Update project counter based on visible projects
-    function updateProjectCounter() {
-        const visibleProjects = document.querySelectorAll('.project-card:not([style*="display: none"])').length;
-        const projectsCountElement = document.getElementById('projects-count');
-        if (projectsCountElement) {
-            animateCounter(projectsCountElement, visibleProjects);
-        }
-    }
+    // Initialize skills scroll
+    const skillsScroll = new SkillsScroll();
     
-    // Call updateProjectCounter whenever projects are toggled
-    document.querySelectorAll('.project-toggle-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            setTimeout(updateProjectCounter, 600);
+    // Initialize projects scroll
+    const projectsScrollInstance = new ProjectsScroll();
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const target = document.querySelector(targetId);
+            if (target) {
+                const headerHeight = document.querySelector('.nav-header')?.offsetHeight || 70;
+                const targetPosition = target.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
     
-    // Initialize skill bars with staggered animation
-    const skillFills = document.querySelectorAll('.skill-fill');
+    // Show body content
+    document.body.style.opacity = '1';
     
-    skillFills.forEach((fill, index) => {
-        setTimeout(() => {
-            fill.style.width = fill.style.width || '0%';
-            fill.style.animation = 'skillLoad 2s ease-in-out';
-        }, index * 200);
-    });
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerHeight = document.querySelector('.nav-header').offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight - 20;
-            
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
+    // Animate elements on load with staggered effect
+    setTimeout(() => {
+        const elements = document.querySelectorAll('.stat-card, .skill-category, .project-card');
+        elements.forEach((element, index) => {
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 300);
 });
 
 // Performance optimization: Throttle scroll events
@@ -479,37 +448,18 @@ window.addEventListener('scroll', throttle(function() {
     if (parallax) {
         parallax.style.transform = `translateY(${scrolled * 0.1}px)`;
     }
-    
-    // Profile image parallax effect
-    const profileImg = document.querySelector('.profile-img');
-    if (profileImg) {
-        const speed = scrolled * 0.1;
-        profileImg.style.transform = `translateY(${speed}px)`;
-    }
 }, 16));
 
-// Add loading animation
-window.addEventListener('load', function() {
-    document.body.style.opacity = '1';
-    
-    // Animate elements on load
-    setTimeout(() => {
-        document.querySelectorAll('.stat-card, .skill-category, .project-card').forEach((element, index) => {
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    }, 500);
-});
-
-// Project Toggle Functionality
+// Project Toggle Functionality (Updated for "All" option)
 class ProjectToggle {
     constructor() {
         this.toggleButtons = document.querySelectorAll('.project-toggle-btn');
         this.projectCards = document.querySelectorAll('.project-card');
-        this.currentCategory = 'web-dev';
-        this.init();
+        this.currentCategory = 'all';
+        
+        if (this.toggleButtons.length > 0 && this.projectCards.length > 0) {
+            this.init();
+        }
     }
     
     init() {
@@ -521,8 +471,8 @@ class ProjectToggle {
             });
         });
         
-        // Show web development projects by default
-        this.showProjects('web-dev');
+        // Show all projects by default
+        this.showProjects('all');
     }
     
     switchCategory(category) {
@@ -533,7 +483,10 @@ class ProjectToggle {
             btn.classList.remove('active');
         });
         
-        document.querySelector(`[data-category="${category}"]`).classList.add('active');
+        const activeButton = document.querySelector(`[data-category="${category}"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
         
         // Add transitioning class to grid to maintain layout
         const projectsGrid = document.getElementById('projectsGrid');
@@ -584,9 +537,15 @@ class ProjectToggle {
     }
     
     showProjects(category) {
-        const categoryCards = Array.from(this.projectCards).filter(card =>
-            card.getAttribute('data-category') === category
-        );
+        let categoryCards;
+        
+        if (category === 'all') {
+            categoryCards = Array.from(this.projectCards);
+        } else {
+            categoryCards = Array.from(this.projectCards).filter(card =>
+                card.getAttribute('data-category') === category
+            );
+        }
         
         if (categoryCards.length === 0) return;
         
@@ -602,13 +561,6 @@ class ProjectToggle {
             // Staggered fade-in animation for visual appeal
             setTimeout(() => {
                 card.classList.add('fade-in');
-                
-                // Check layout after all cards are shown
-                if (index === categoryCards.length - 1 && projectsScrollInstance) {
-                    setTimeout(() => {
-                        projectsScrollInstance.checkAndUpdateLayout();
-                    }, 550); // After animation completes
-                }
             }, index * 80); // Reduced stagger for smoother feel
         });
     }
@@ -616,19 +568,7 @@ class ProjectToggle {
 
 // Touch device optimizations
 if ('ontouchstart' in window) {
-    // Add touch-specific styles
     document.body.classList.add('touch-device');
-    
-    // Optimize hover effects for touch devices
-    document.querySelectorAll('.stat-card, .project-card, .contact-link').forEach(element => {
-        element.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
-        });
-        
-        element.addEventListener('touchend', function() {
-            this.style.transform = 'scale(1)';
-        });
-    });
 }
 
 // Skills Section Horizontal Scroll with Buttons
@@ -637,23 +577,9 @@ class SkillsScroll {
         this.skillsGrid = document.getElementById('skillsGrid');
         this.scrollLeftBtn = document.querySelector('.skills-scroll-left');
         this.scrollRightBtn = document.querySelector('.skills-scroll-right');
-        this.scrollAmount = 0; // Will be calculated dynamically
         
         if (this.skillsGrid && this.scrollLeftBtn && this.scrollRightBtn) {
-            this.calculateScrollAmount();
             this.init();
-        }
-    }
-    
-    calculateScrollAmount() {
-        // Calculate scroll amount based on first card width + gap
-        const firstCard = this.skillsGrid.querySelector('.skill-category');
-        if (firstCard) {
-            const cardWidth = firstCard.offsetWidth;
-            const gap = 30; // Match CSS gap
-            this.scrollAmount = cardWidth + gap;
-        } else {
-            this.scrollAmount = 350; // Fallback
         }
     }
     
@@ -668,9 +594,8 @@ class SkillsScroll {
         // Initial button state update
         this.updateButtonStates();
         
-        // Show/hide buttons based on scroll position and screen size
+        // Handle window resize
         window.addEventListener('resize', () => {
-            this.calculateScrollAmount();
             this.updateButtonStates();
         });
     }
@@ -678,8 +603,12 @@ class SkillsScroll {
     scroll(direction) {
         if (!this.skillsGrid) return;
         
+        const cardWidth = this.skillsGrid.querySelector('.skill-category')?.offsetWidth || 300;
+        const gap = 30;
+        const scrollAmount = cardWidth + gap;
+        
         const currentScroll = this.skillsGrid.scrollLeft;
-        const scrollDirection = direction === 'left' ? -this.scrollAmount : this.scrollAmount;
+        const scrollDirection = direction === 'left' ? -scrollAmount : scrollAmount;
         const targetScroll = currentScroll + scrollDirection;
         
         this.skillsGrid.scrollTo({
@@ -695,49 +624,18 @@ class SkillsScroll {
         const isAtStart = scrollLeft <= 10;
         const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 10;
         
-        // Update left button
-        this.scrollLeftBtn.disabled = isAtStart;
-        if (isAtStart) {
-            this.scrollLeftBtn.style.opacity = '0.3';
-        } else {
-            this.scrollLeftBtn.style.opacity = '1';
-        }
-        
-        // Update right button
-        this.scrollRightBtn.disabled = isAtEnd;
-        if (isAtEnd) {
-            this.scrollRightBtn.style.opacity = '0.3';
-        } else {
-            this.scrollRightBtn.style.opacity = '1';
-        }
-        
-        // Show/hide buttons on mobile (show only if content overflows)
-        if (window.innerWidth <= 768) {
-            const hasOverflow = scrollWidth > clientWidth;
-            this.scrollLeftBtn.style.display = hasOverflow ? 'none' : 'none';
-            this.scrollRightBtn.style.display = hasOverflow ? 'none' : 'none';
-        } else {
-            this.scrollLeftBtn.style.display = 'flex';
-            this.scrollRightBtn.style.display = 'flex';
-        }
+        // Update button opacity based on scroll position
+        this.scrollLeftBtn.style.opacity = isAtStart ? '0.3' : '1';
+        this.scrollRightBtn.style.opacity = isAtEnd ? '0.3' : '1';
     }
 }
 
-// Initialize skills scroll when DOM is ready
-let projectsScrollInstance = null;
-
-document.addEventListener('DOMContentLoaded', function() {
-    const skillsScroll = new SkillsScroll();
-    projectsScrollInstance = new ProjectsScroll();
-});
-
-// Projects Section Horizontal Scroll with Buttons (only when more than 3 projects)
+// Projects Section Horizontal Scroll with Buttons
 class ProjectsScroll {
     constructor() {
         this.projectsGrid = document.getElementById('projectsGrid');
         this.scrollLeftBtn = document.querySelector('.projects-scroll-left');
         this.scrollRightBtn = document.querySelector('.projects-scroll-right');
-        this.scrollAmount = 0;
         this.minProjectsForScroll = 3;
         
         if (this.projectsGrid && this.scrollLeftBtn && this.scrollRightBtn) {
@@ -756,13 +654,9 @@ class ProjectsScroll {
         // Update button states on scroll
         this.projectsGrid.addEventListener('scroll', () => this.updateButtonStates());
         
-        // Watch for project category changes
-        this.observeProjectChanges();
-        
         // Handle window resize
         window.addEventListener('resize', () => {
             this.checkAndUpdateLayout();
-            this.calculateScrollAmount();
             this.updateButtonStates();
         });
     }
@@ -780,42 +674,28 @@ class ProjectsScroll {
         const shouldScroll = visibleProjects.length > this.minProjectsForScroll;
         
         if (shouldScroll) {
-            // Enable horizontal scrolling
             this.projectsGrid.classList.add('scrollable');
-            this.calculateScrollAmount();
-            this.updateButtonStates();
-            
             // Show buttons on desktop
             if (window.innerWidth > 768) {
                 this.scrollLeftBtn.classList.add('visible');
                 this.scrollRightBtn.classList.add('visible');
             }
         } else {
-            // Use grid layout
             this.projectsGrid.classList.remove('scrollable');
             this.scrollLeftBtn.classList.remove('visible');
             this.scrollRightBtn.classList.remove('visible');
         }
     }
     
-    calculateScrollAmount() {
-        if (!this.projectsGrid.classList.contains('scrollable')) return;
-        
-        const firstCard = this.projectsGrid.querySelector('.project-card:not([style*="display: none"])');
-        if (firstCard) {
-            const cardWidth = firstCard.offsetWidth;
-            const gap = 25; // Match CSS gap
-            this.scrollAmount = cardWidth + gap;
-        } else {
-            this.scrollAmount = 400; // Fallback
-        }
-    }
-    
     scroll(direction) {
         if (!this.projectsGrid || !this.projectsGrid.classList.contains('scrollable')) return;
         
+        const cardWidth = this.projectsGrid.querySelector('.project-card')?.offsetWidth || 400;
+        const gap = 25;
+        const scrollAmount = cardWidth + gap;
+        
         const currentScroll = this.projectsGrid.scrollLeft;
-        const scrollDirection = direction === 'left' ? -this.scrollAmount : this.scrollAmount;
+        const scrollDirection = direction === 'left' ? -scrollAmount : scrollAmount;
         const targetScroll = currentScroll + scrollDirection;
         
         this.projectsGrid.scrollTo({
@@ -833,46 +713,15 @@ class ProjectsScroll {
         const isAtStart = scrollLeft <= 10;
         const isAtEnd = scrollLeft >= scrollWidth - clientWidth - 10;
         
-        // Update left button
-        this.scrollLeftBtn.disabled = isAtStart;
-        if (isAtStart) {
-            this.scrollLeftBtn.style.opacity = '0.3';
-        } else {
-            this.scrollLeftBtn.style.opacity = '1';
-        }
-        
-        // Update right button
-        this.scrollRightBtn.disabled = isAtEnd;
-        if (isAtEnd) {
-            this.scrollRightBtn.style.opacity = '0.3';
-        } else {
-            this.scrollRightBtn.style.opacity = '1';
-        }
-        
-        // Hide buttons on mobile
-        if (window.innerWidth <= 768) {
-            this.scrollLeftBtn.classList.remove('visible');
-            this.scrollRightBtn.classList.remove('visible');
-        }
-    }
-    
-    observeProjectChanges() {
-        // Watch for changes when project toggle happens
-        const observer = new MutationObserver(() => {
-            setTimeout(() => {
-                this.checkAndUpdateLayout();
-            }, 100); // Small delay to ensure display changes are applied
-        });
-        
-        if (this.projectsGrid) {
-            observer.observe(this.projectsGrid, {
-                childList: true,
-                attributes: true,
-                attributeFilter: ['style', 'class'],
-                subtree: true
-            });
-        }
+        // Update button opacity based on scroll position
+        this.scrollLeftBtn.style.opacity = isAtStart ? '0.3' : '1';
+        this.scrollRightBtn.style.opacity = isAtEnd ? '0.3' : '1';
     }
 }
 
-
+// Clean up on page unload
+window.addEventListener('beforeunload', function() {
+    if (typingTimeout) {
+        clearTimeout(typingTimeout);
+    }
+});
