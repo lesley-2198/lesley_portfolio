@@ -60,7 +60,7 @@ filterBtns.forEach(btn => {
     });
 });
 
-// ── CONTACT FORM ──
+// ── CONTACT FORM (UPGRADED) ──
 const form = document.getElementById('contactForm');
 const formNote = document.getElementById('formNote');
 
@@ -71,27 +71,52 @@ form?.addEventListener('submit', async (e) => {
     const btnText = submitBtn.querySelector('.btn-text');
     const originalText = btnText.textContent;
 
+    // Prevent double submit
+    if (submitBtn.disabled) return;
+
     submitBtn.disabled = true;
     btnText.textContent = 'Sending…';
     formNote.textContent = '';
     formNote.className = 'form-note';
 
+    // Timeout setup (8s)
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
     try {
         const res = await fetch(form.action, {
             method: 'POST',
             body: new FormData(form),
-            headers: { Accept: 'application/json' }
+            headers: { Accept: 'application/json' },
+            signal: controller.signal
         });
 
+        clearTimeout(timeout);
+
         if (res.ok) {
-            formNote.textContent = 'Message sent. I\'ll be in touch.';
+            formNote.textContent = "Message sent. I'll be in touch.";
             formNote.className = 'form-note success';
             form.reset();
         } else {
-            throw new Error('Server error');
+            // Try extract error from Formspree
+            const data = await res.json().catch(() => null);
+
+            if (data?.errors?.length) {
+                formNote.textContent = data.errors[0].message;
+            } else {
+                formNote.textContent = 'Something went wrong. Please try again.';
+            }
+
+            formNote.className = 'form-note error';
         }
-    } catch {
-        formNote.textContent = 'Something went wrong. Try emailing me directly.';
+
+    } catch (err) {
+        if (err.name === 'AbortError') {
+            formNote.textContent = 'Request timed out. Check your connection and try again.';
+        } else {
+            formNote.textContent = 'Network error. Try again or email me directly.';
+        }
+
         formNote.className = 'form-note error';
     } finally {
         submitBtn.disabled = false;
