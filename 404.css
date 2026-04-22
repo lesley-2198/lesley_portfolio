@@ -1,5 +1,13 @@
-/* ===== YOUR DESIGN TOKENS ===== */
-    :root {
+/* ═══════════════════════════════════════
+   LESLEY NGCOBO — 404 PAGE
+   Matches main site design system exactly
+═══════════════════════════════════════ */
+ 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+ 
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
       --cream: #F5F0E8;
       --ink: #0D0D0D;
       --mid: #6B6B6B;
