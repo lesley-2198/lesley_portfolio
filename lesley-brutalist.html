@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LESLEY NGCOBO — SOFTWARE ENGINEER</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Archivo+Black&family=Archivo:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a0a;
+  --white: #f5f0e8;
+  --yellow: #FFE500;
+  --red: #FF2D00;
+  --border: 3px solid #0a0a0a;
+  --thick: 5px solid #0a0a0a;
+  --font-display: 'Archivo Black', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-body: 'Archivo', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--black);
+  border-bottom: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 52px;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--yellow);
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0 20px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.1s, color 0.1s;
+}
+
+.nav-links a:hover { background: var(--yellow); color: var(--black); }
+
+.nav-available {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--yellow);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--yellow);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ── HERO ── */
+.hero {
+  border-bottom: var(--thick);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 92vh;
+}
+
+.hero-left {
+  border-right: var(--thick);
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 9vw, 112px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.hero-name .strike {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-name .accent {
+  color: var(--yellow);
+  -webkit-text-stroke: 3px var(--black);
+  background: var(--yellow);
+}
+
+.hero-role-block {
+  background: var(--black);
+  color: var(--white);
+  padding: 20px 24px;
+  border: var(--border);
+}
+
+.hero-role-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.hero-role-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--yellow);
+  line-height: 1.2;
+}
+
+.hero-bio {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #333;
+  max-width: 440px;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 14px 24px;
+  background: var(--black);
+  color: var(--white);
+  border: var(--border);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  display: inline-block;
+}
+
+.btn-primary:hover { background: var(--yellow); color: var(--black); }
+
+.btn-ghost {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 14px 24px;
+  background: transparent;
+  color: var(--black);
+  border: var(--border);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  display: inline-block;
+}
+
+.btn-ghost:hover { background: var(--black); color: var(--white); }
+
+/* hero right */
+.hero-right {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.hero-photo-block {
+  position: relative;
+  border-bottom: var(--thick);
+  overflow: hidden;
+  min-height: 360px;
+}
+
+.hero-photo-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(20%) contrast(1.05);
+}
+
+.hero-photo-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: var(--yellow);
+  padding: 10px 20px;
+  border-top: var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero-tags-block {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.hero-tag-row-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 10px;
+  border: 2px solid var(--black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--white);
+  cursor: default;
+  transition: background 0.1s, color 0.1s;
+}
+
+.tag:hover { background: var(--black); color: var(--white); }
+
+.tag.highlight { background: var(--yellow); }
+
+/* ── MARQUEE ── */
+.marquee-bar {
+  background: var(--black);
+  border-bottom: var(--border);
+  overflow: hidden;
+  padding: 12px 0;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 0;
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-track span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--white);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+.marquee-track span.sep { color: var(--yellow); padding: 0 4px; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── SECTION SHARED ── */
+.section-header {
+  border-bottom: var(--border);
+  padding: 24px 48px;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  background: var(--white);
+}
+
+.section-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #999;
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.section-title em {
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--yellow);
+  -webkit-text-stroke: 2px var(--black);
+}
+
+/* ── ABOUT STRIP ── */
+.about-strip {
+  border-bottom: var(--thick);
+  display: grid;
+  grid-template-columns: 80px 1fr 340px;
+}
+
+.about-num-col {
+  border-right: var(--border);
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.about-body-col {
+  border-right: var(--border);
+  padding: 48px;
+}
+
+.about-body-col h2 {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.about-body-col p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #222;
+  max-width: 560px;
+}
+
+.about-pull-col {
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  background: var(--black);
+}
+
+.about-pull-col blockquote {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--yellow);
+  text-transform: uppercase;
+  border-left: 4px solid var(--yellow);
+  padding-left: 20px;
+}
+
+/* ── WORK ── */
+.work-section { border-bottom: var(--thick); }
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: var(--border);
+}
+
+.timeline-item:last-child { border-bottom: none; }
+
+.timeline-meta {
+  border-right: var(--border);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--white);
+}
+
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #555;
+}
+
+.type-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+  border: 2px solid var(--black);
+  display: inline-block;
+  width: fit-content;
+}
+
+.type-current { background: var(--yellow); }
+.type-contract { background: var(--black); color: var(--white); }
+.type-academic { background: var(--white); }
+.type-freelance { background: var(--red); color: var(--white); border-color: var(--red); }
+.type-other { background: #eee; }
+
+.timeline-content {
+  padding: 32px 40px;
+}
+
+.timeline-role {
+  font-family: var(--font-display);
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.timeline-company {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #555;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.timeline-location {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 14px;
+}
+
+.timeline-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #333;
+  max-width: 580px;
+  margin-bottom: 14px;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+}
+
+.timeline-tags li {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border: 1.5px solid #ccc;
+  color: #555;
+}
+
+/* ── PROJECTS ── */
+.projects-section { border-bottom: var(--thick); }
+
+.filter-bar {
+  border-bottom: var(--border);
+  padding: 0 48px;
+  display: flex;
+  gap: 0;
+  background: var(--white);
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 24px;
+  background: transparent;
+  border: none;
+  border-right: var(--border);
+  cursor: pointer;
+  color: #666;
+  transition: background 0.1s, color 0.1s;
+}
+
+.filter-btn:first-child { border-left: none; }
+.filter-btn:hover, .filter-btn.active { background: var(--black); color: var(--white); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.project-card {
+  border-right: var(--border);
+  border-bottom: var(--border);
+  overflow: hidden;
+  transition: transform 0.15s;
+  position: relative;
+  cursor: pointer;
+}
+
+.project-card:nth-child(even) { border-right: none; }
+
+.project-card.card-large {
+  grid-column: 1 / -1;
+  border-right: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.project-card.card-large .card-img { border-right: var(--border); }
+
+.card-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(30%);
+  transition: filter 0.2s, transform 0.3s;
+  min-height: 220px;
+}
+
+.project-card:hover .card-img img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+.card-status-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+  background: var(--yellow);
+  border: 2px solid var(--black);
+  color: var(--black);
+}
+
+.card-status-badge.in-dev { background: var(--red); color: var(--white); border-color: var(--red); }
+
+.card-body {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-index {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #bbb;
+  letter-spacing: 0.15em;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.card-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.card-tags span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border: 1.5px solid #bbb;
+  color: #555;
+}
+
+.card-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.card-links a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 14px;
+  border: 2px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+  transition: background 0.1s, color 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-links a:hover { background: var(--black); color: var(--white); }
+
+/* ── EDUCATION ── */
+.education-section { border-bottom: var(--thick); }
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: var(--border);
+}
+
+.edu-card {
+  padding: 48px;
+  border-right: var(--border);
+}
+
+.edu-card:last-child { border-right: none; }
+
+.edu-card.featured { background: var(--black); color: var(--white); }
+
+.edu-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #888;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.edu-card.featured .edu-date { color: var(--yellow); }
+
+.edu-degree {
+  font-family: var(--font-display);
+  font-size: 22px;
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.edu-school {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.edu-card.featured .edu-school { color: #aaa; }
+
+.edu-location {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #999;
+  margin-bottom: 16px;
+}
+
+.edu-note {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #555;
+}
+
+.edu-card.featured .edu-note { color: #ccc; }
+
+.edu-icon-box {
+  width: 44px; height: 44px;
+  background: var(--yellow);
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* ── CONTACT ── */
+.contact-section { border-bottom: var(--thick); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: var(--border);
+}
+
+.contact-left {
+  border-right: var(--border);
+  padding: 48px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.contact-intro {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #ccc;
+  margin-bottom: 36px;
+  max-width: 420px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: #ccc;
+  transition: color 0.1s;
+}
+
+.contact-link:last-child { border-bottom: 1px solid rgba(255,255,255,0.1); }
+.contact-link:hover { color: var(--yellow); }
+
+.contact-link-icon {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.contact-right {
+  padding: 48px;
+}
+
+.contact-right h3 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #777;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background: var(--white);
+  border: var(--border);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.1s;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--yellow);
+  background: #fffde6;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--black);
+  color: var(--white);
+  border: var(--border);
+  font-family: var(--font-display);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-submit:hover { background: var(--yellow); color: var(--black); }
+
+.form-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #888;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: var(--thick);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--yellow);
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #555;
+  letter-spacing: 0.08em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-links a {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  color: #888;
+  font-size: 14px;
+  transition: border-color 0.1s, color 0.1s;
+}
+
+.footer-links a:hover { border-color: var(--yellow); color: var(--yellow); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { border-right: none; border-bottom: var(--thick); padding: 32px 24px; }
+  .hero-right { grid-template-rows: 280px auto; }
+  .about-strip { grid-template-columns: 1fr; }
+  .about-num-col { display: none; }
+  .about-pull-col { border-top: var(--border); }
+  .about-body-col { border-right: none; padding: 32px 24px; }
+  .about-pull-col { padding: 32px 24px; }
+  .timeline-item { grid-template-columns: 1fr; }
+  .timeline-meta { border-right: none; border-bottom: var(--border); }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card { border-right: none; }
+  .project-card.card-large { grid-template-columns: 1fr; }
+  .project-card.card-large .card-img { border-right: none; border-bottom: var(--border); }
+  .edu-grid { grid-template-columns: 1fr; }
+  .edu-card { border-right: none; border-bottom: var(--border); }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-left { border-right: none; border-bottom: var(--thick); }
+  .section-header { padding: 20px 24px; }
+  .filter-bar { padding: 0 24px; overflow-x: auto; }
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">LN_</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-available">
+    <div class="nav-dot"></div>
+    Available for hire
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-left">
+    <div class="hero-number">[ 00 ] — Portfolio 2026</div>
+
+    <div class="hero-name">
+      LESLEY<br>
+      <span class="accent">NGCOBO</span>
+    </div>
+
+    <div class="hero-role-block">
+      <div class="hero-role-label">Current title</div>
+      <div class="hero-role-title">Software Engineer<br>Full-Stack · JHB · ZA</div>
+    </div>
+
+    <p class="hero-bio">I build web applications that work — clean architecture, secure APIs, and UIs that don't fight the user. Based in Johannesburg, studying Software Engineering, and always building something.</p>
+
+    <div class="hero-cta-row">
+      <a href="files/Lesley Ngcobo - Resume.pdf" class="btn-primary" download>↓ Download CV</a>
+      <a href="#projects" class="btn-ghost">See my work →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo-block">
+      <img src="https://lesleyngcobo.netlify.app/files/lezz.jpg" alt="Lesley Ngcobo" onerror="this.style.background='#222';this.src='';">
+      <div class="hero-photo-overlay">
+        <span>Graduate · JHB · ZA</span>
+        <span>Est. 2022</span>
+      </div>
+    </div>
+
+    <div class="hero-tags-block">
+      <div class="hero-tag-row-label">Stack</div>
+      <div class="tag-cloud">
+        <span class="tag highlight">Angular</span>
+        <span class="tag highlight">ASP.NET Core</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">SQL Server</span>
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Azure</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">JWT Auth</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Angular</span><span class="sep">✦</span>
+    <span>ASP.NET Core</span><span class="sep">✦</span>
+    <span>TypeScript</span><span class="sep">✦</span>
+    <span>SQL Server</span><span class="sep">✦</span>
+    <span>Entity Framework</span><span class="sep">✦</span>
+    <span>JWT Auth</span><span class="sep">✦</span>
+    <span>REST APIs</span><span class="sep">✦</span>
+    <span>Python</span><span class="sep">✦</span>
+    <span>FastAPI</span><span class="sep">✦</span>
+    <span>Docker</span><span class="sep">✦</span>
+    <span>Azure</span><span class="sep">✦</span>
+    <span>RxJS</span><span class="sep">✦</span>
+    <span>Netlify</span><span class="sep">✦</span>
+    <span>Git</span><span class="sep">✦</span>
+    <span>Angular</span><span class="sep">✦</span>
+    <span>ASP.NET Core</span><span class="sep">✦</span>
+    <span>TypeScript</span><span class="sep">✦</span>
+    <span>SQL Server</span><span class="sep">✦</span>
+    <span>Entity Framework</span><span class="sep">✦</span>
+    <span>JWT Auth</span><span class="sep">✦</span>
+    <span>REST APIs</span><span class="sep">✦</span>
+    <span>Python</span><span class="sep">✦</span>
+    <span>FastAPI</span><span class="sep">✦</span>
+    <span>Docker</span><span class="sep">✦</span>
+    <span>Azure</span><span class="sep">✦</span>
+    <span>RxJS</span><span class="sep">✦</span>
+    <span>Netlify</span><span class="sep">✦</span>
+    <span>Git</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-strip reveal">
+  <div class="about-num-col">[ 01 ] — About</div>
+  <div class="about-body-col">
+    <h2>About</h2>
+    <p>I got into software engineering because I wanted to build things that actually mattered — not just demos, but systems people use. I studied at Nelson Mandela University, spent time supporting student wellness (which taught me more about communication than any lecture did), and then went full-send on software — freelancing, capstone projects, contract work. Now I'm at the Academy of Accelerated Technology Education in Johannesburg, sharpening my craft. I like clean architecture, honest code, and shipping things that work.</p>
+  </div>
+  <div class="about-pull-col">
+    <blockquote>"Clean architecture, honest code, shipping things that work."</blockquote>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="work-section">
+  <div class="section-header reveal">
+    <span class="section-num">[ 02 ]</span>
+    <h2 class="section-title">Work <em>Experience</em></h2>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-meta">
+      <span class="timeline-date">Apr 2026 — Present</span>
+      <span class="type-badge type-current">Current</span>
+    </div>
+    <div class="timeline-content">
+      <h3 class="timeline-role">Bench Learner</h3>
+      <p class="timeline-company">Academy of Accelerated Technology Education</p>
+      <p class="timeline-location">Johannesburg, Remote</p>
+      <p class="timeline-desc">Software Engineering Path — structured immersion programme accelerating industry-ready software engineering skills.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-meta">
+      <span class="timeline-date">Nov 2025 — Jan 2026</span>
+      <span class="type-badge type-contract">Contract</span>
+    </div>
+    <div class="timeline-content">
+      <h3 class="timeline-role">Full-Stack Web Developer</h3>
+      <p class="timeline-company">Nani Innovations</p>
+      <p class="timeline-location">Port Elizabeth, Remote</p>
+      <p class="timeline-desc">Designed and built a production admin dashboard — user management, store management, discount rules, content moderation, and reporting. Worked directly with stakeholders to translate business requirements into working software. Clean architecture, version-controlled, shipped.</p>
+      <ul class="timeline-tags">
+        <li>Angular</li><li>ASP.NET Core</li><li>RBAC</li><li>Dashboard UI</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-meta">
+      <span class="timeline-date">Sep 2025 — Oct 2025</span>
+      <span class="type-badge type-academic">Academic</span>
+    </div>
+    <div class="timeline-content">
+      <h3 class="timeline-role">Full-Stack Developer</h3>
+      <p class="timeline-company">Madiba HealthConnect — Capstone Project</p>
+      <p class="timeline-location">Port Elizabeth, Hybrid</p>
+      <p class="timeline-desc">Built a full-stack healthcare web platform from the ground up. Angular frontend with reactive forms, route guards and HTTP interceptors. ASP.NET Core API with JWT auth and role-based access control. SQL Server via Entity Framework Core. Deployed to production.</p>
+      <ul class="timeline-tags">
+        <li>Angular</li><li>ASP.NET Core</li><li>SQL Server</li><li>JWT</li><li>EF Core</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-meta">
+      <span class="timeline-date">Jul 2025 — Aug 2025</span>
+      <span class="type-badge type-freelance">Freelance</span>
+    </div>
+    <div class="timeline-content">
+      <h3 class="timeline-role">Software Engineer</h3>
+      <p class="timeline-company">Client Portfolio Website</p>
+      <p class="timeline-location">Port Elizabeth, Remote</p>
+      <p class="timeline-desc">Designed and delivered a responsive portfolio site for a real client — HTML, CSS, JavaScript with Netlify CMS so they could manage content themselves without touching code. Git-based workflow, deployed on Netlify. Client left happy.</p>
+      <ul class="timeline-tags">
+        <li>HTML/CSS/JS</li><li>Netlify CMS</li><li>Git</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-item reveal">
+    <div class="timeline-meta">
+      <span class="timeline-date">Mar 2024 — Nov 2024</span>
+      <span class="type-badge type-other">Part-time</span>
+    </div>
+    <div class="timeline-content">
+      <h3 class="timeline-role">Wellness Student Assistant</h3>
+      <p class="timeline-company">Premier Student Accommodation</p>
+      <p class="timeline-location">Port Elizabeth, On-site</p>
+      <p class="timeline-desc">Ran health promotion programmes and wellness events for students. Peer advocacy, outreach, workshop organisation. Taught me how to communicate, plan, and show up for people — skills no framework ships with.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="section-header reveal">
+    <span class="section-num">[ 03 ]</span>
+    <h2 class="section-title">Featured <em>Projects</em></h2>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="web-dev">Web Dev</button>
+    <button class="filter-btn" data-cat="data-science">Data Science</button>
+  </div>
+
+  <div class="projects-grid" id="projectsGrid">
+
+    <article class="project-card card-large reveal" data-cat="web-dev">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80" alt="Madiba HealthConnect">
+        <div class="card-status-badge">Completed</div>
+      </div>
+      <div class="card-body">
+        <span class="card-index">01</span>
+        <h3 class="card-title">Madiba HealthConnect</h3>
+        <p class="card-desc">Full-stack healthcare platform — secure patient management, appointment scheduling, JWT auth, RBAC. Angular frontend, ASP.NET Core API, SQL Server. Deployed to production. Final-year capstone — a fully functional healthcare system with secure multi-role access, clean separation between frontend, API, and data layers.</p>
+        <div class="card-tags">
+          <span>Angular</span><span>ASP.NET Core</span><span>SQL Server</span><span>JWT</span>
+        </div>
+        <div class="card-links">
+          <a href="https://github.com/lesley-2198/Madiba-HealthConnect" target="_blank">⌥ Source</a>
+          <a href="https://madiba-health-connect.vercel.app" target="_blank">↗ Live</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-cat="web-dev">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=700&q=80" alt="SkillBridge">
+        <div class="card-status-badge">Completed</div>
+      </div>
+      <div class="card-body">
+        <span class="card-index">02</span>
+        <h3 class="card-title">SkillBridge</h3>
+        <p class="card-desc">Educational platform connecting students with courses and bursary opportunities. Built the course and bursary APIs with Python/FastAPI. APIs deployed and live — the course and bursary endpoints are actively serving the web application.</p>
+        <div class="card-tags"><span>Python</span><span>FastAPI</span><span>REST APIs</span></div>
+        <div class="card-links">
+          <a href="https://sbridge.netlify.app/" target="_blank">↗ Landing</a>
+          <a href="https://skillsbridge-14eb8.web.app/" target="_blank">↗ App</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-cat="data-science">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=900&q=80" alt="Credit Card Fraud Detection">
+        <div class="card-status-badge">Completed</div>
+      </div>
+      <div class="card-body">
+        <span class="card-index">03</span>
+        <h3 class="card-title">Credit Card Fraud Detection</h3>
+        <p class="card-desc">End-to-end fraud detection on 284,807 real transactions (0.17% fraud rate). Tackled class imbalance with SMOTE, benchmarked three models. XGBoost: AUC 0.982, F1 0.863, precision 0.944. Findings surfaced through a Power BI monitoring dashboard.</p>
+        <div class="card-tags"><span>R</span><span>XGBoost</span><span>SMOTE</span><span>Power BI</span></div>
+        <div class="card-links">
+          <a href="https://github.com/lesley-2198/CreditCardFraudDetection.git" target="_blank">⌥ Source</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-cat="data-science">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?w=600&q=80" alt="DataQuest Recommender">
+        <div class="card-status-badge">Completed</div>
+      </div>
+      <div class="card-body">
+        <span class="card-index">04</span>
+        <h3 class="card-title">DataQuest Recommender</h3>
+        <p class="card-desc">Built for the Dataquest 2025 Recommender Systems Challenge. From global popularity models through UBCF and IBCF to a 4-signal weighted hybrid. IBCF: best raw precision (0.022) and recall (0.109) at k=5. Full hybrid chosen for real-world deployment suitability.</p>
+        <div class="card-tags"><span>R</span><span>ML</span><span>Collaborative Filtering</span></div>
+        <div class="card-links">
+          <a href="https://github.com/lesley-2198/DataquestRcSys2025.git" target="_blank">⌥ Source</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-cat="web-dev">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80" alt="PropertyQuest">
+        <div class="card-status-badge in-dev">In Development</div>
+      </div>
+      <div class="card-body">
+        <span class="card-index">05</span>
+        <h3 class="card-title">PropertyQuest</h3>
+        <p class="card-desc">Real estate web platform — responsive Angular UI, reactive programming, clean component architecture. Ongoing — architecture and component structure in place. Demonstrates Angular reactive programming patterns and clean SCSS component design.</p>
+        <div class="card-tags"><span>Angular</span><span>TypeScript</span><span>RxJS</span><span>SCSS</span></div>
+        <div class="card-links">
+          <a href="https://github.com/lesley-2198/PropertyQuest.git" target="_blank">⌥ Source</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-cat="web-dev">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Client Portfolio">
+        <div class="card-status-badge">Completed</div>
+      </div>
+      <div class="card-body">
+        <span class="card-index">06</span>
+        <h3 class="card-title">Client Portfolio Website</h3>
+        <p class="card-desc">Delivered a responsive, content-managed portfolio site for a real client. Handed off August 2025. They've been managing their own content via Netlify CMS ever since — no developer involvement needed for updates.</p>
+        <div class="card-tags"><span>HTML/CSS/JS</span><span>Netlify CMS</span></div>
+        <div class="card-links">
+          <a href="https://bongiwe.netlify.app" target="_blank">↗ Live</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="education-section">
+  <div class="section-header reveal">
+    <span class="section-num">[ 04 ]</span>
+    <h2 class="section-title">Education</h2>
+  </div>
+
+  <div class="edu-grid">
+    <div class="edu-card featured reveal">
+      <div class="edu-icon-box">🎓</div>
+      <span class="edu-date">2022 — 2025</span>
+      <h3 class="edu-degree">Bachelor of Information Technology</h3>
+      <p class="edu-school">Nelson Mandela University</p>
+      <p class="edu-location">Port Elizabeth, Eastern Cape</p>
+      <p class="edu-note">Majored in Software Development and Data Analytics. Capstone project: Madiba HealthConnect — a full-stack healthcare web platform graded as a final-year deliverable.</p>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-icon-box" style="background:var(--black);border-color:var(--black);">💻</div>
+      <span class="edu-date">Apr 2026 — Present</span>
+      <h3 class="edu-degree">Software Engineering Path</h3>
+      <p class="edu-school">Academy of Accelerated Technology Education</p>
+      <p class="edu-location">Johannesburg, Gauteng</p>
+      <p class="edu-note">Industry-aligned programme focused on accelerating job-readiness in software engineering.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-header reveal">
+    <span class="section-num">[ 05 ]</span>
+    <h2 class="section-title">Let's <em>Talk</em></h2>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <p class="contact-intro">I'm looking for graduate and junior software engineer roles where I can build real things with a real team. If you've got something worth working on, I'd like to hear about it.</p>
+      <div class="contact-links">
+        <a href="mailto:lesleyngcobo45@gmail.com" class="contact-link">
+          <div class="contact-link-icon">✉</div>
+          lesleyngcobo45@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/lesley-ngcobo-449b88240/" target="_blank" class="contact-link">
+          <div class="contact-link-icon">in</div>
+          linkedin.com/in/lesley-ngcobo
+        </a>
+        <a href="https://github.com/lesley-2198" target="_blank" class="contact-link">
+          <div class="contact-link-icon">gh</div>
+          github.com/lesley-2198
+        </a>
+        <a href="files/Lesley Ngcobo - Resume.pdf" class="contact-link" download>
+          <div class="contact-link-icon">↓</div>
+          Download Resume
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-right reveal">
+      <h3>Send a message</h3>
+      <form id="contactForm" action="https://formspree.io/f/mojykqrq" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell me about the role or project..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message →</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">LN_</span>
+  <p class="footer-copy">© 2026 Lesley Ngcobo. Built with purpose.</p>
+  <div class="footer-links">
+    <a href="https://github.com/lesley-2198" target="_blank" title="GitHub">gh</a>
+    <a href="https://www.linkedin.com/in/lesley-ngcobo-449b88240/" target="_blank" title="LinkedIn">in</a>
+    <a href="mailto:lesleyngcobo45@gmail.com" title="Email">✉</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('#projectsGrid .project-card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    cards.forEach(card => {
+      const match = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = match ? '' : 'none';
+    });
+  });
+});
+
+const form = document.getElementById('contactForm');
+const note = document.getElementById('formNote');
+if (form) {
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Sending...';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (res.ok) {
+        note.textContent = 'Message sent. I\'ll be in touch.';
+        note.style.color = '#2a7a2a';
+        form.reset();
+      } else {
+        note.textContent = 'Something went wrong. Email me directly.';
+        note.style.color = '#c00';
+      }
+    } catch {
+      note.textContent = 'Network error. Email me directly.';
+      note.style.color = '#c00';
+    }
+    btn.textContent = 'Send Message →';
+  });
+}
+</script>
+</body>
+</html>
